@@ -31,17 +31,21 @@ void Library::addBookToList()
     Book newBook;
     newBook.readBook();
 
+    cout << "\nBook added to library.\n";
     numOfBooks++;
 }
 
 void Library::removeBookFromList(char newISBN[])
 {
-    Book newBook;
     for(int i = 0; i < numOfBooks; i++)
     {
-        if(!strcmp(newISBN, newBook.numISBN))
+        if(!strcmp(newISBN, newBook[i].numISBN))
         {
-            
+            for(int j = 0; j < numOfBooks - 1; j++)
+            {
+                array[j] = array[j + 1];
+            }
+            cout << "\nBook removed from library.\n";
             numOfBooks--;
         }
         else
