@@ -17,19 +17,23 @@
 - печат на студента (име, ЕГН, факултетен номер, среден успех);
 - печат на факултетния номер и оценките на студента;
 */
-class Student
+struct Student
 {
-    char *name;
-    char EGN[10];
-    char facNum[6];
-    Grade grades[5];
+    const static int EGN_LENGTH = 10;
+    const static int FACULTY_NUMBER_LENGTH = 6;
+    const static int NUMBER_OF_SUBJECTS = 5;
 
-public:
+    char *name;
+    char *surname;
+    char *family;
+    char EGN[EGN_LENGTH];
+    char facNum[FACULTY_NUMBER_LENGTH];
+    Grade grades[NUMBER_OF_SUBJECTS];
+
     void input();
-    double averageGrade();
     void printStudent();
     void printFacNumAndGrades();
-    void removeStudent();
+    double averageGrade();
     void clean();
 };
 

@@ -12,7 +12,7 @@ class Time
 {
     double time;
 public:
-    Time(double hours, double minutes);
+    Time(int hours, int minutes);
 
     
 };

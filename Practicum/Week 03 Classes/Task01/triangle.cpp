@@ -6,9 +6,9 @@ using std::cin;
 using std::cout;
 using std::endl;
 
-bool Triangle::validate(double a, double b, double c)
+bool Triangle::validate()
 {
-    return (a + b <= c || a + c <= b || b + c <= a);   
+    return !(a + b > c && a + c > b && b + c > a && a > 0 && b > 0 && c > 0);
 }
 
 void Triangle::input()
@@ -16,25 +16,21 @@ void Triangle::input()
     do
     {
         cout << "a = ";
-        cin >> sideA;
-        cout << "B = ";
-        cin >> sideB;
-        cout << "C = ";
-        cin >> sideC;
-    }while(validate(sideA, sideB, sideC) != 0 && (sideA > 0 && sideB > 0 && sideC > 0));
+        cin >> a;
+        cout << "b = ";
+        cin >> b;
+        cout << "c = ";
+        cin >> c;
+    } while (this->validate());
 }
 
 double Triangle::perimeter()
 {
-    return (sideA + sideB + sideC);
+    return (a + b + c);
 }
 
 double Triangle::area()
 {
-    double area, p;
-
-    p = (sideA + sideB + sideC) / 2;
-    area = sqrt(p*(p-sideA)*(p-sideB)*(p-sideC));
-
-    return area;
+    double p = (a + b + c) / 2;
+    return sqrt(p * (p - a) * (p - b) * (p - c));
 }

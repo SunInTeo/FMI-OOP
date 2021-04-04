@@ -8,11 +8,8 @@
 */
 class Triangle
 {
-    double sideA;
-    double sideB;
-    double sideC;
-
-    bool validate(double a, double b, double c);
+    double a, b, c;
+    bool validate();
 
 public:
     void input();

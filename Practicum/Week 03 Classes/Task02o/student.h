@@ -1,5 +1,5 @@
-#ifndef student
-#define student
+#ifndef STUDENT_H
+#define STUDENT_H
 
 #include "mark.h"
 
