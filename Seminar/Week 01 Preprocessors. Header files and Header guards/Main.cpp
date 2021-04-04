@@ -1,23 +1,25 @@
-#include "DynArray.h"
 #include <iostream>
+#include "DynArray.h"
 
+using std::cout;
+using std::endl;
 
 int main() {
 
 	DynArray dynArray = create();
+
 	push_back(dynArray, 10);
 	push_back(dynArray, 20);
 
-	std::cout << get(dynArray, 1) << std::endl;
+	cout << get(dynArray, 1) << endl;
 
 	pop_back(dynArray);
 
-	std::cout << get(dynArray, 0) << std::endl;
+	cout << get(dynArray, 0) << endl;
+	
 	eraseDynMemory(dynArray);
 
-	std::cout << get(dynArray, 0) << std::endl;
-
-
+	cout << get(dynArray, 0) << endl;
 
 	return 0;
 }

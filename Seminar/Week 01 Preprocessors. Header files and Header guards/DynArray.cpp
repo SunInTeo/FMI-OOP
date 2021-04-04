@@ -1,68 +1,86 @@
-#include "DynArray.h"
 #include <iostream>
+#include "DynArray.h"
 
+using std::cout;
+using std::endl;
 
-DynArray create(size_t capacity) {
+// 1
+DynArray create(size_t capacity)
+{
 	DynArray dynArray;
 	dynArray.capacity = capacity;
 	dynArray.size = 0;
-	dynArray.arr = new int[dynArray.capacity];
+	dynArray.array = new int[dynArray.capacity];
 	return dynArray;
 }
 
-void push_back(DynArray& dynArray, int element) {
-	if (dynArray.size == dynArray.capacity) {
+// 2
+void push_back(DynArray &dynArray, int element)
+{
+	if (dynArray.size == dynArray.capacity)
+	{
 		resize(dynArray);
 	}
 
-	dynArray.arr[dynArray.size++] = element;
+	dynArray.array[dynArray.size] = element;
+	++dynArray.size;
 }
 
-void resize(DynArray& dynArray) {
+// 3
+void resize(DynArray &dynArray)
+{
+	int *oldArray = dynArray.array;
+	
 	dynArray.capacity *= 2;
+	
+	dynArray.array = new(std::nothrow) int[dynArray.capacity];
 
-	int* old = dynArray.arr;
-	dynArray.arr = new int[dynArray.capacity];
 
-	for (size_t i = 0; i < dynArray.size; i++) {
-		dynArray.arr[i] = old[i];
+	for (size_t i = 0; i < dynArray.size; ++i)
+	{
+		dynArray.array[i] = oldArray[i];
 	}
 
-	delete[] old;
-
+	delete[] oldArray;
 }
 
-void pop_back(DynArray& dynArray) {
-
-	dynArray.size--;
+// 4
+void pop_back(DynArray &dynArray)
+{
+	--dynArray.size;
 }
 
-void remove(DynArray& dynArray, size_t index) {
-	if (index < 0 || index >= dynArray.size) {
-		std::cout << "Not valid index" << std::endl;
-		return;
-	}
-
-	for (size_t i = index; i < dynArray.size - 1; i++) {
-		dynArray.arr[i] = dynArray.arr[i + 1];
-	}
-
-	dynArray.size--;
-}
-
-int get(DynArray& dynArray, size_t index) {
-	if (index < 0 || index >= dynArray.size) {
-		std::cout << "Not valid index" << std::endl;
+// 5
+int get(DynArray &dynArray, size_t index)
+{
+	if (index < 0 || index >= dynArray.size)
+	{
+		cout << "Not a valid index" << endl;
 		return -1;
 	}
 
-	return dynArray.arr[index];
+	return dynArray.array[index];
 }
 
-void print(DynArray dynArray) {
+// 6
+void remove(DynArray &dynArray, size_t index)
+{
+	if (index < 0 || index >= dynArray.size)
+	{
+		cout << "Not a valid index" << endl;
+		return;
+	}
 
+	for (size_t i = index; i < dynArray.size - 1; ++i)
+	{
+		dynArray.array[i] = dynArray.array[i + 1];
+	}
+
+	--dynArray.size;
 }
 
-void eraseDynMemory(DynArray& dynArray) {
-	delete[] dynArray.arr;
+// 7
+void eraseDynMemory(DynArray &dynArray)
+{
+	delete[] dynArray.array;
 }
