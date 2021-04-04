@@ -1,16 +1,20 @@
-#pragma once
+#ifndef BOOK_H
+#define BOOK_H
+
 struct Book
 {
 	char* title;
 	char* author;
 	char* genre;
 	double price;
-	int sales;
+	int numberOfSales;
+	double readersRating;
 
-	void initiate();
+	void initialize();
 
 	void print();
 
-	void freeMemory();
+	void deallocateMemoryBook();
 };
 
+#endif

@@ -1,10 +1,14 @@
-#pragma once
+#ifndef LIBRARY_H
+#define LIBRARY_H
+
 #include "Book.h"
+#include "Utils.h"
+
 struct Library
 {
-	size_t size;
-	size_t capacity;
-	Book* books;
+	size_t sizeOfLibrary;
+	size_t capacityOfLibrary;
+	Book* library;
 
 	void create(size_t capacity);
 
@@ -14,9 +18,12 @@ struct Library
 
 	void printBooks();
 
-	void freeMemory();
+	void deallocateMemoryLibrary();
 
 	Book& getBestBook();
 
+	void printBookByPrice(priceFilter fn);
+
 };
 
+#endif

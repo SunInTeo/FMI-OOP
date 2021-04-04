@@ -1,3 +1,10 @@
-#pragma once
+#ifndef UTILS_H
+#define UTILS_H
 
-void copyStr(char* buffer, char*& field);
+typedef bool (*priceFilter) (double a, double b);
+
+bool isMoreExpensive(double a, double b);
+
+bool isCheaper(double a, double b);
+
+#endif

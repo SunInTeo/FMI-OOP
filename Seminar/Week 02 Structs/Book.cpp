@@ -1,47 +1,79 @@
-#include "Book.h"
-#include "Utils.h"
 #include <iostream>
 #include <cstring>
+#include "Book.h"
+
+using std::cin;
+using std::cout;
+using std::endl;
 
 const int SIZE = 100;
 
-void Book::initiate() {
+void Book::initialize() {
 
 	char buffer[SIZE];
+	size_t size = 0;
 
-	std::cout << "Title\n";
-	std::cin.getline(buffer, SIZE);
-	copyStr(buffer, this->title);
+	cout << "Title: ";
+	cin.getline(buffer, SIZE);
+	size = strlen(buffer);
+	this->title = new(std::nothrow) char[size + 1];
+	if (!this->title)
+    {
+        cout << "Memory problem!" << endl;
+        return;
+    }
+	strcpy(this->title, buffer);
+	title[size] = '\0';
 
-	std::cout << "Author\n";
-	std::cin.getline(buffer, SIZE);
-	copyStr(buffer, this->author);
+	cout << "Author: ";
+	cin.getline(buffer, SIZE);
+	size = strlen(buffer);
+	this->author = new(std::nothrow) char[size + 1];
+	if (!this->author)
+    {
+        cout << "Memory problem!" << endl;
+        return;
+    }
+	strcpy(this->author, buffer);
+	author[size] = '\0';
 
-	std::cout << "Genre\n";
-	std::cin.getline(buffer, SIZE);
-	copyStr(buffer, this->genre);
+	cout << "Genre: ";
+	cin.getline(buffer, SIZE);
+	size = strlen(buffer);
+	this->genre = new(std::nothrow) char[size + 1];
+	if (!this->genre)
+    {
+        cout << "Memory problem!" << endl;
+        return;
+    }
+	strcpy(this->genre, buffer);
+	genre[size] = '\0';
 
-	std::cout << "Price\n";
-	std::cin >> this->price;
+	cout << "Price: ";
+	cin >> this->price;
 	
-	std::cout << "Sales\n";
-	std::cin >> this->sales;
-	std::cin.ignore();
-
-
-	std::cout << std::endl << std::endl;
+	cout << "Sales: ";
+	cin >> this->numberOfSales;
+	
+	cout << "Rating: ";
+	cin >> this->readersRating;
+	
+	cin.ignore();
 
 }
 
-void Book::print() {
-	std::cout << "Title: " << this->title << std::endl;
-	std::cout << "Author: " << this->author << std::endl;
-	std::cout << "Genre: " << this->genre << std::endl;
-	std::cout << "Price: " << this->price << std::endl;
-	std::cout << "Sales: " << this->sales << std::endl;
+void Book::print() 
+{
+	cout << "Title: " << this->title << endl;
+	cout << "Author: " << this->author << endl;
+	cout << "Genre: " << this->genre << endl;
+	cout << "Price: " << this->price << endl;
+	cout << "Sales: " << this->numberOfSales << endl;
+	cout << "Rating: " << this->readersRating << "/10" << endl;
 }
 
-void Book::freeMemory() {
+void Book::deallocateMemoryBook() 
+{
 	delete[] this->title;
 	delete[] this->author;
 	delete[] this->genre;
