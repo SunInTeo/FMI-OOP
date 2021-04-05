@@ -2,7 +2,6 @@
 #include <cstring>
 #include "Person.h"
 
-using std::cin;
 using std::cout;
 using std::endl;
 
@@ -36,7 +35,7 @@ Person::Person(const char* _name, const unsigned _age, const bool _hasLicense)
 // 4
 Person& Person::operator = (const Person &p)
 {
-    cout<<"Assignment operator called "<<endl;
+    //cout<<"Assignment operator called "<<endl;
     this->setName(p.name);
     this->setAge(p.age);
     this->setHasLicense(p.hasLicense);
@@ -46,8 +45,8 @@ Person& Person::operator = (const Person &p)
 // 5
 Person::~Person()
 {
-    cout << "Removed" << endl;
-    delete[] name;
+    //cout << "Removed" << endl;
+    delete[] this->name;
 }
 
 // 6 

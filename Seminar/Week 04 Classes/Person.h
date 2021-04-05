@@ -25,17 +25,17 @@ public:
 
     Person(const char *, const unsigned, const bool); // 3
 
-    Person &operator=(const Person &p); // 4
+    Person &operator=(const Person &); // 4
 
     ~Person(); // 5
 
-    char *getName() const;             // ]
-    unsigned getAge() const;           // |
-    bool getHasLicense() const;        // |
-                                        // 6
-    void setName(const char *);        // |
-    void setAge(const unsigned);       // |
-    void setHasLicense(const bool);    // ]
+    char *getName() const;          // ]
+    unsigned getAge() const;        // |
+    bool getHasLicense() const;     // |
+                                    // 6
+    void setName(const char *);     // |
+    void setAge(const unsigned);    // |
+    void setHasLicense(const bool); // ]
 
     void printInfo(); // 7
 };
