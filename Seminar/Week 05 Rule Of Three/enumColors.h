@@ -5,5 +5,5 @@ enum Color
     BLUE,
     BLACK,
     WHITE,
-    GRAY;
-}
+    GRAY
+};

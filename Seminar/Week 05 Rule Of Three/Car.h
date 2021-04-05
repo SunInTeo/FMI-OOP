@@ -1,6 +1,7 @@
 #ifndef CAR_H
 #define CAR_H
 
+#include "Person.h"
 #include "enumColors.h"
 
 /*
@@ -13,12 +14,34 @@
 - функция, която принтира информацията за човека. */
 class Car
 {
-    Person person;
+    Person owner;
     char *brand;
     char *licensePlate;
     Color color;
-public: 
-    
+
+    void copy(const Car &);
+    void deallocate();
+
+public:
+    Car();
+    Car(const Person &, const char *, const char *, const Color);
+    Car(const Car &);
+
+    Car &operator=(const Car &);
+
+    Person getOwner() const;
+    char *getBrand() const;
+    char *getLicensePlate() const;
+    Color getColor() const;
+
+    void setOwner(const Person &);
+    void setBrand(const char *);
+    void setLicensePlate(const char *);
+    void setColor(const Color);
+
+    void printInfoCar();
+
+    ~Car();
 };
 
 #endif
