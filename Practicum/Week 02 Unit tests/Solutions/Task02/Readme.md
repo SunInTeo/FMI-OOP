@@ -1,4 +1,4 @@
 Compilation command:
 ```
-g++ .\*.cpp
+g++ .\main.cpp .\point.cpp
 ```
