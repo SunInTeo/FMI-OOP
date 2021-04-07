@@ -1,4 +1,0 @@
-Compilation command:
-```
-g++ .\*.cpp
-```
