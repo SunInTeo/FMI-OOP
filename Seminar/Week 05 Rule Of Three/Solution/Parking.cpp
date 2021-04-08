@@ -18,7 +18,7 @@ void Parking::copy(const Parking &other)
     this->owner = other.owner;
     this->capacity = other.capacity;
 
-    this->cars = (other.size > this->capacity) ? (new(std::nothrow) Car[other.size]) : (new(std::nothrow) Car[this->capacity]);
+    this->cars = new(std::nothrow) Car[this->capacity];
     if (!this->cars)
     {
         cout << "Memory problem\n";
@@ -91,7 +91,7 @@ Parking::Parking(const char *_companyName, const Person &_owner, const Car *_car
     this->owner = _owner;
     this->capacity = _capacity;
 
-    this->cars = (_size > this->capacity) ? (new(std::nothrow) Car[_size]) : (new(std::nothrow) Car[this->capacity]);
+    this->cars = new(std::nothrow) Car[this->capacity];
     if (!this->cars)
     {
         cout << "Memory problem\n";
@@ -255,7 +255,7 @@ Car *Parking::getCarsByOwner(const char *name, size_t &count)
     if (!result)
     {
         cout << "Memory problem\n";
-        //return;
+        return nullptr;
     }
 
     int index = 0;
