@@ -1,1 +1,1 @@
-const int MAX_STRING_LENGTH = 32;
+static const int MAX_STRING_LENGTH = 32;
