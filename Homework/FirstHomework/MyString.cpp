@@ -25,6 +25,8 @@ void MyString::clear()
     {
         delete[] string;
     }
+
+    string == nullptr;
     length = 0;
 }
 
@@ -147,11 +149,9 @@ std::size_t MyString::size() const
 
 void MyString::push_back(char c)
 {
-    int length = strlen(string);
+    char *buffer = new char[length + 1];
 
-    char *buffer = new char[length + 2];
-
-    for (int i = 0; i < length; ++i)
+    for (int i = 0; i < length + 1; ++i)
     {
         buffer[i] = string[i];
     }
@@ -165,15 +165,10 @@ void MyString::push_back(char c)
 
 void MyString::pop_back()
 {
-    int length = strlen(string);
-    char *buffer = new char[length];
+    char *buffer = new char[length--];
 
-    for (int i = 0; i < length - 1; ++i)
-    {
-        buffer[i] = string[i];
-    }
-
-    buffer[length] = '\0';
+    strcpy(buffer, string);
+    buffer[length - 1] = '\0';
 
     *this = MyString(buffer);
 
@@ -182,7 +177,9 @@ void MyString::pop_back()
 
 const char *MyString::c_str() const
 {
-    return string;
+    char *newArray;
+    strcpy(newArray, string);
+    return newArray;
 }
 
 MyString &MyString::operator=(const MyString &rhs)
@@ -195,7 +192,7 @@ MyString &MyString::operator=(const MyString &rhs)
 
 MyString &MyString::operator+=(char c)
 {
-    int newSize = strlen(string) + 2;
+    int newSize = length + 1;
     resize(newSize);
     string[newSize - 1] = c;
     string[newSize] = '\0';
@@ -204,7 +201,7 @@ MyString &MyString::operator+=(char c)
 
 MyString &MyString::operator+=(const MyString &rhs)
 {
-    int newSize = strlen(string) + strlen(rhs.string) + 1;
+    int newSize = length + strlen(rhs.string) + 1;
     resize(newSize);
     strcat(string, rhs.string);
     string[newSize] = '\0';
