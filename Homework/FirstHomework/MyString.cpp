@@ -151,7 +151,7 @@ void MyString::push_back(char c)
 {
     char *buffer = new char[length + 1];
 
-    for (int i = 0; i < length + 1; ++i)
+    for (std::size_t i = 0; i < length + 1; ++i)
     {
         buffer[i] = string[i];
     }
@@ -192,16 +192,13 @@ MyString &MyString::operator=(const MyString &rhs)
 
 MyString &MyString::operator+=(char c)
 {
-    int newSize = length + 1;
-    resize(newSize);
-    string[newSize - 1] = c;
-    string[newSize] = '\0';
+    push_back(c);
     return *this;
 }
 
 MyString &MyString::operator+=(const MyString &rhs)
 {
-    int newSize = length + strlen(rhs.string) + 1;
+    std::size_t newSize = length + strlen(rhs.string) + 1;
     resize(newSize);
     strcat(string, rhs.string);
     string[newSize] = '\0';
@@ -210,39 +207,18 @@ MyString &MyString::operator+=(const MyString &rhs)
 
 MyString MyString::operator+(char c) const
 {
-    int newSize = length + 1;
+    MyString temp(string);
 
-    char *buffer = new char[newSize + 1];
-
-    for (int i = 0; i < newSize; ++i)
-    {
-        if (i < length)
-        {
-            buffer[i] = string[i];
-        }
-        else
-        {
-            buffer[i] = c;
-        }
-    }
-
-    buffer[newSize] = '\0';
-
-    MyString temp;
-    temp.length = strlen(buffer);
-    temp.string = new char[strlen(buffer) + 1];
-    strcpy(temp.string, buffer);
-
-    delete[] buffer;
-
+    temp.push_back(c);
+    
     temp = *this;
-
+    
     return *this;
 }
 
 MyString MyString::operator+(const MyString &rhs) const
 {
-    int newSize = rhs.length + length;
+    std::size_t newSize = rhs.length + length;
 
     char *buffer = new char[newSize + 1];
 
@@ -266,6 +242,13 @@ MyString MyString::operator+(const MyString &rhs) const
     strcpy(temp.string, buffer);
 
     delete[] buffer;
+
+    /* might try this instead of the above
+    MyString temp(string);
+    for(std::size_t i = 0; i < rhs.length; ++i)
+    {
+        temp.push_back(rhs.string[i]);
+    }*/
 
     temp = *this;
 
