@@ -16,7 +16,22 @@ void MyString::resize(int length)
     MyString temp(*this);
 
     reallocateMemory();
-    strcpy(this->string, temp.c_str());
+    strcpy(string, temp.c_str());
+}
+
+void MyString::clear()
+{
+    if (string != nullptr)
+    {
+        delete[] string;
+    }
+    length = 0;
+}
+
+void MyString::reallocateMemory()
+{
+    clear();
+    string = new char[strlen(string) + 1];
 }
 
 MyString::MyString()
@@ -57,7 +72,7 @@ char &MyString::at(std::size_t pos)
     {
         if (pos > 0 && pos <= strlen(string))
         {
-            return this->string[pos];
+            return string[pos];
         }
         else
         {
@@ -77,7 +92,7 @@ const char &MyString::at(std::size_t pos) const
     {
         if (pos > 0 && pos <= strlen(string))
         {
-            return this->string[pos];
+            return string[pos];
         }
         else
         {
@@ -105,21 +120,6 @@ const char &MyString::back() const { return string[length]; }
 bool MyString::empty() const { return !length; }
 
 std::size_t MyString::size() const { return length; }
-
-void MyString::clear()
-{
-    if (string != nullptr)
-    {
-        delete[] string;
-    }
-    length = 0;
-}
-
-void MyString::reallocateMemory()
-{
-    clear();
-    string = new char[strlen(string) + 1];
-}
 
 void MyString::push_back(char c)
 {

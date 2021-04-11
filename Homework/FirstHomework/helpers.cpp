@@ -54,19 +54,4 @@ char *strcat(char *destination, char *source)
     return destination;
 }
 
-char *toLower(char *string)
-{
-    for(int i = 0; i < strlen(string); ++i)
-    {
-        char c = string[i];
-
-        if ((c >= 'A') && (c <= 'Z'))
-        {
-            string[i] += ('a' - 'A');
-        }  
-    }
-
-    return string;
-}
-
 #endif
