@@ -7,10 +7,10 @@
 class MyString
 {
     char *string = nullptr;
-    size_t length = 0;
+    std::size_t length = 0;
 
-    void copy(const MyString &);
-    void resize(int);
+    void copy(const MyString &rhs);
+    void resize(int length);
     void clear();
     void reallocateMemory();
 

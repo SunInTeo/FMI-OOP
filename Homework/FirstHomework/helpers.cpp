@@ -56,8 +56,7 @@ char *strcat(char *destination, char *source)
 
 char *toLower(char *string)
 {
-    int i = 0;
-    while(string) 
+    for(int i = 0; i < strlen(string); ++i)
     {
         char c = string[i];
 
@@ -65,8 +64,6 @@ char *toLower(char *string)
         {
             string[i] += ('a' - 'A');
         }  
-
-        ++i;  
     }
 
     return string;
