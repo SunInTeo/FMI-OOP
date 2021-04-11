@@ -57,7 +57,7 @@ char &MyString::at(std::size_t pos)
     {
         if (pos > 0 && pos <= strlen(string))
         {
-            return this->string[pos - 1];
+            return this->string[pos];
         }
         else
         {
@@ -77,7 +77,7 @@ const char &MyString::at(std::size_t pos) const
     {
         if (pos > 0 && pos <= strlen(string))
         {
-            return this->string[pos - 1];
+            return this->string[pos];
         }
         else
         {
@@ -90,9 +90,9 @@ const char &MyString::at(std::size_t pos) const
     }
 }
 
-char &MyString::operator[](std::size_t pos) { return string[pos - 1]; }
+char &MyString::operator[](std::size_t pos) { return string[pos]; }
 
-const char &MyString::operator[](std::size_t pos) const { return string[pos - 1]; }
+const char &MyString::operator[](std::size_t pos) const { return string[pos]; }
 
 char &MyString::front() { return string[0]; }
 
@@ -264,5 +264,5 @@ bool MyString::operator!=(const MyString &rhs) const
 // not sure about the method
 bool MyString::operator<(const MyString &rhs) const
 {
-    return string < rhs.string;
+    return strcmp(string, rhs.string) < 0;
 }
