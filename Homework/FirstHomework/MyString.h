@@ -1,13 +1,13 @@
 #ifndef MY_STRING_H
 #define MY_STRING_H
 
-#include <iostream>
+#include <cstddef> //size_t
 #include "helpers.cpp"
 
 class MyString
 {
-    char *string = nullptr;
-    std::size_t length = 0;
+    char *string;
+    std::size_t length;
 
     void copy(const MyString &rhs);
     void resize(int length);

@@ -105,21 +105,45 @@ const char &MyString::at(std::size_t pos) const
     }
 }
 
-char &MyString::operator[](std::size_t pos) { return string[pos]; }
+char &MyString::operator[](std::size_t pos)
+{
+    return string[pos];
+}
 
-const char &MyString::operator[](std::size_t pos) const { return string[pos]; }
+const char &MyString::operator[](std::size_t pos) const
+{
+    return string[pos];
+}
 
-char &MyString::front() { return string[0]; }
+char &MyString::front()
+{
+    return string[0];
+}
 
-const char &MyString::front() const { return string[0]; }
+const char &MyString::front() const
+{
+    return string[0];
+}
 
-char &MyString::back() { return string[length]; }
+char &MyString::back()
+{
+    return string[length];
+}
 
-const char &MyString::back() const { return string[length]; }
+const char &MyString::back() const
+{
+    return string[length];
+}
 
-bool MyString::empty() const { return !length; }
+bool MyString::empty() const
+{
+    return !length;
+}
 
-std::size_t MyString::size() const { return length; }
+std::size_t MyString::size() const
+{
+    return length;
+}
 
 void MyString::push_back(char c)
 {
