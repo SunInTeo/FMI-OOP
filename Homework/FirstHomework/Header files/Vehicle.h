@@ -10,6 +10,7 @@ class Vehicle
     std::size_t numberOfParkingSpaces = 0;
 
 public:
+    Vehicle() = delete;
     Vehicle(const char *registration, const char *description, std::size_t space);
     const char* registration() const;
     const char* description() const;

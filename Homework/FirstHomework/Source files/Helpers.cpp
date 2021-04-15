@@ -1,17 +1,19 @@
-#ifndef helpers
-#define helpers
+#include "..\Header files\Helpers.h"
 
-int strlen(const char *text)
+int m_strlen(const char *text)
 {
     int len = 0;
-    while (text[len])
+    if (text) 
     {
-        ++len;
+        while (text[len])
+        {
+            ++len;
+        }
     }
     return len;
 }
 
-void strcpy(char *dest, const char *src)
+void m_strcpy(char *dest, const char *src)
 {
     int pos = 0;
     while (src[pos])
@@ -22,7 +24,7 @@ void strcpy(char *dest, const char *src)
     dest[pos] = '\0';
 }
 
-int strcmp(const char *text1, const char *text2)
+int m_strcmp(const char *text1, const char *text2)
 {
     while (*text1 && *text1 == *text2)
     {
@@ -34,7 +36,7 @@ int strcmp(const char *text1, const char *text2)
     return *(const unsigned char *)text1 - *(const unsigned char *)text2;
 }
 
-char *strcat(char *destination, char *source)
+char *m_strcat(char *destination, char *source)
 {
     int c = 0;
     int sc;
@@ -44,7 +46,7 @@ char *strcat(char *destination, char *source)
         ++c;
     }
 
-    for (sc = 0; sc < strlen(source); ++sc)
+    for (sc = 0; sc < m_strlen(source); ++sc)
     {
         destination[sc + c] = source[sc];
     }
@@ -53,5 +55,3 @@ char *strcat(char *destination, char *source)
 
     return destination;
 }
-
-#endif
