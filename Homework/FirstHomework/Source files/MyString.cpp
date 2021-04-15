@@ -166,6 +166,7 @@ MyString &MyString::operator+=(const MyString &rhs)
 
     char *buffer = new char[newSize];
 
+    std::size_t index = 0;
     for (std::size_t i = 0; i < newSize; ++i)
     {
         if (i < m_strlen(str))
@@ -174,7 +175,8 @@ MyString &MyString::operator+=(const MyString &rhs)
         }
         else
         {
-            buffer[i] = rhs[i];
+            buffer[i] = rhs.str[index];
+            ++index;
         }
     }
     buffer[newSize] = '\0';
