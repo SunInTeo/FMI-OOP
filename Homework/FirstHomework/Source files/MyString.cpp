@@ -107,16 +107,14 @@ std::size_t MyString::size() const
 
 void MyString::push_back(char c)
 {
-    std::size_t newSize = m_strlen(str) + 1;
+    char *buffer = new char[m_strlen(str) + 2];
 
-    char *buffer = new char[newSize];
-
-    for (std::size_t i = 0; i < newSize - 1; ++i)
+    for (std::size_t i = 0; i < m_strlen(str); ++i)
     {
         buffer[i] = str[i];
     }
-    buffer[newSize - 1] = c;
-    buffer[newSize] = '\0';
+    buffer[m_strlen(str)] = c;
+    buffer[m_strlen(str) + 1] = '\0';
 
     delete[] str;
     str = buffer;
@@ -125,15 +123,15 @@ void MyString::push_back(char c)
 void MyString::pop_back()
 {
     assert(m_strlen(str) > 0 && "Length should be greater than 0");
-    std::size_t newSize = m_strlen(str) - 1;
 
+    std::size_t newSize = m_strlen(str);
     char *buffer = new char[newSize];
 
-    for (std::size_t i = 0; i < newSize; ++i)
+    for (std::size_t i = 0; i < newSize - 1; ++i)
     {
         buffer[i] = str[i];
     }
-    buffer[newSize] = '\0';
+    buffer[newSize - 1] = '\0';
 
     delete[] str;
     str = buffer;
@@ -164,7 +162,7 @@ MyString &MyString::operator+=(const MyString &rhs)
 {
     std::size_t newSize = m_strlen(str) + m_strlen(rhs.str);
 
-    char *buffer = new char[newSize];
+    char *buffer = new char[newSize + 1];
 
     std::size_t index = 0;
     for (std::size_t i = 0; i < newSize; ++i)
@@ -199,31 +197,18 @@ MyString MyString::operator+(char c) const
 
 MyString MyString::operator+(const MyString &rhs) const
 {
-    MyString temp;
+    MyString temp(str);
 
-    if (!rhs.str)
-    {
-        return *this;
-    }
-    else if (!this->str)
-    {
-        return rhs;
-    }
-    else
-    {
-        temp.str = str;
-
-        std::size_t temp_size = m_strlen(temp.str);
+    /*std::size_t temp_size = m_strlen(temp.str);
         std::size_t rhs_size = m_strlen(rhs.str);
         for (std::size_t i = 0; i < rhs_size; ++i)
         {
             temp.str[temp_size + i] = rhs.str[i];
         }
 
-        temp.str[temp_size + rhs_size] = '\0';
+        temp.str[temp_size + rhs_size] = '\0';*/
 
-        return temp;
-    }
+    return temp += rhs;
 }
 
 bool MyString::operator==(const MyString &rhs) const
