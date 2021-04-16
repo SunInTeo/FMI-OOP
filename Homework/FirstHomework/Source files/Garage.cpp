@@ -96,4 +96,5 @@ const Vehicle *Garage::find(const char *registration) const
             return vehicleArray[i];
         }
     }
+    return nullptr;
 }
