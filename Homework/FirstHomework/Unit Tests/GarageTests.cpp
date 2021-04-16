@@ -65,22 +65,23 @@ TEST_CASE("at() function check")
     myGarage.insert(v2);
     myGarage.insert(v3);
 
-    REQUIRE(!strcmp(myGarage.at(0).registration(), "1234"));
-    REQUIRE(!strcmp(myGarage.at(0).description(), "asd1"));
+    REQUIRE(!m_strcmp(myGarage.at(0).registration(), "1234"));
+    REQUIRE(!m_strcmp(myGarage.at(0).description(), "asd1"));
 
-    REQUIRE(!strcmp(myGarage.at(1).registration(), "5678"));
-    REQUIRE(!strcmp(myGarage.at(1).description(), "asd2"));
+    REQUIRE(!m_strcmp(myGarage.at(1).registration(), "5678"));
+    REQUIRE(!m_strcmp(myGarage.at(1).description(), "asd2"));
 
-    REQUIRE(!strcmp(myGarage.at(2).registration(), "9999"));
-    REQUIRE(!strcmp(myGarage.at(2).description(), "asd3"));
+    REQUIRE(!m_strcmp(myGarage.at(2).registration(), "9999"));
+    REQUIRE(!m_strcmp(myGarage.at(2).description(), "asd3"));
 
     bool testPassed = false;
     try
     {
-        std::size_t temp = myGarage.at(3).space();
+        myGarage.at(10);
     }
-    catch (std::out_of_range)
+    catch (const std::out_of_range &e)
     {
+       // std::cout << e.what() << std::endl;
         testPassed = true;
     }
     REQUIRE(testPassed == true);
@@ -96,15 +97,16 @@ TEST_CASE("Operator[] check")
     myGarage.insert(v2);
     myGarage.insert(v3);
 
-    REQUIRE(!strcmp(myGarage[0].registration(), "1324"));
-    REQUIRE(!strcmp(myGarage[0].description(), "asd1"));
+    REQUIRE(!m_strcmp(myGarage[0].registration(), "1234"));
+    REQUIRE(!m_strcmp(myGarage[0].description(), "asd1"));
 
-    REQUIRE(!strcmp(myGarage[1].registration(), "5678"));
-    REQUIRE(!strcmp(myGarage[1].description(), "asd2"));
+    REQUIRE(!m_strcmp(myGarage[1].registration(), "5678"));
+    REQUIRE(!m_strcmp(myGarage[1].description(), "asd2"));
 
-    REQUIRE(!strcmp(myGarage[2].registration(), "9999"));
-    REQUIRE(!strcmp(myGarage[2].description(), "asd3"));
+    REQUIRE(!m_strcmp(myGarage[2].registration(), "9999"));
+    REQUIRE(!m_strcmp(myGarage[2].description(), "asd3"));
 }
+
 TEST_CASE("clear() function check/ size() function check/ empty() function check")
 {
     Garage myGarage(10);
@@ -154,10 +156,10 @@ TEST_CASE("Find() function check")
     myGarage.insert(v4);
 
     const Vehicle *found1 = myGarage.find("1234");
-    REQUIRE(!strcmp(found1->registration(), "1234"));
+    REQUIRE(!m_strcmp(found1->registration(), "1234"));
 
     const Vehicle *found2 = myGarage.find("9999");
-    REQUIRE(!strcmp(found2->registration(), "9999"));
+    REQUIRE(!m_strcmp(found2->registration(), "9999"));
 
     const Vehicle *found3 = myGarage.find("5454");
     REQUIRE(found3 == nullptr);

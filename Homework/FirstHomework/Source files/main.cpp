@@ -1,5 +1,5 @@
 //#include <iostream>
-#include "..\Header files\Garage.h"
+#include "..\Header files\MyString.h"
 
 using std::cin;
 using std::cout;

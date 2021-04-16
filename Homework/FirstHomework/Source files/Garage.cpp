@@ -49,15 +49,15 @@ void Garage::erase(const char *registration)
 
     if (index != capacity)
     {
-        vehicleArray[index] = vehicleArray[capacity - 1];
         sizeTaken -= vehicleArray[index]->space();
+        vehicleArray[index] = vehicleArray[numberOfVehicles - 1];
         --numberOfVehicles;
     }
 }
 
 const Vehicle &Garage::at(std::size_t pos) const
 {
-    if (pos >= sizeTaken)
+    if (pos >= numberOfVehicles)
     {
         throw std::out_of_range("Invalid position");
     }
