@@ -15,12 +15,6 @@ void MyString::clear()
     }
 }
 
-void MyString::reallocateMemory()
-{
-    clear();
-    str = new char[m_strlen(str) + 1];
-}
-
 MyString::MyString()
 {
     str = new char[1];
@@ -109,6 +103,8 @@ void MyString::push_back(char c)
 {
     char *buffer = new char[m_strlen(str) + 2];
 
+    if(!buffer) return;
+
     for (std::size_t i = 0; i < m_strlen(str); ++i)
     {
         buffer[i] = str[i];
@@ -124,17 +120,7 @@ void MyString::pop_back()
 {
     assert(m_strlen(str) > 0 && "Length should be greater than 0");
 
-    std::size_t newSize = m_strlen(str);
-    char *buffer = new char[newSize];
-
-    for (std::size_t i = 0; i < newSize - 1; ++i)
-    {
-        buffer[i] = str[i];
-    }
-    buffer[newSize - 1] = '\0';
-
-    delete[] str;
-    str = buffer;
+    str[m_strlen(str) - 1] = '\0';
 }
 
 const char *MyString::c_str() const
@@ -198,15 +184,6 @@ MyString MyString::operator+(char c) const
 MyString MyString::operator+(const MyString &rhs) const
 {
     MyString temp(str);
-
-    /*std::size_t temp_size = m_strlen(temp.str);
-        std::size_t rhs_size = m_strlen(rhs.str);
-        for (std::size_t i = 0; i < rhs_size; ++i)
-        {
-            temp.str[temp_size + i] = rhs.str[i];
-        }
-
-        temp.str[temp_size + rhs_size] = '\0';*/
 
     return temp += rhs;
 }
