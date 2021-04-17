@@ -130,9 +130,8 @@ void VehicleAllocator::cleanAllVehicles()
         delete vhclArray[i];
     }
     delete[] vhclArray;
-    //delete myGarage;
+
     vehiclesAmount = 0;
-    //vhclArray = new Vehicle *[vehiclesAmount];
 }
 void VehicleAllocator::cleanVehiclesInMyGarage() 
 {
