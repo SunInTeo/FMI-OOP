@@ -1,65 +1,35 @@
 //#include <iostream>
-#include "..\Header files\MyString.h"
+#include "..\Header files\VehicleAllocator.h"
 
 using std::cin;
 using std::cout;
 using std::endl;
 
+const int MAX_STRING_SIZE = 100;
+
+/*
+Sample program showing creating/adding/removing vehicles
+*/
 int main()
 {
-    
-    //cout << "ASDF" << endl;
-    
-    
-    //MyString string1("asd1");
-    //MyString string2("asd2");
-    
-    //MyString string3;
+    VehicleAllocator vhclAlloc(30);
 
-    //cout << "INITIALIZED STRING3" << endl;
-    //MyString string3; 
-    //string3 = string1 + string2;
-    //cout << "POMOSHT" << endl;
-    //cout << string3.c_str() << endl;
+    Vehicle vhcl1 = vhclAlloc.generateNewVehicle("1234", "asd1", 3);
+    Vehicle vhcl2 = vhclAlloc.generateNewVehicle("5678", "asd2", 4);
+    Vehicle vhcl3 = vhclAlloc.generateNewVehicle("9999", "asd3", 5);
 
-    //string3 += string1;
+    vhclAlloc.addVehicleToMyGarage(vhcl1);
+    vhclAlloc.addVehicleToMyGarage(vhcl2);
+    vhclAlloc.addVehicleToMyGarage(vhcl3);
+    vhclAlloc.printVehiclesFromMyGarage();
 
-    //cout << string3.c_str() << endl;
+    cout<<"\n---------------------------------------------\n";
 
+    vhclAlloc.removeVehicleFromMyGarage(vhcl1);
+    vhclAlloc.printVehiclesFromMyGarage();
+    vhclAlloc.removeVehicleFromMyGarage(vhcl3);
+    vhclAlloc.printVehiclesFromMyGarage();
 
-    //string1 += string2;
-    //cout << string1.c_str() << endl;
-    
-    //string2 = string2 + string1;
-    //cout << string2.c_str() << endl;
-
-
-
-    //string3 = string2; 
-
-    //cout << string1.c_str() << endl;
-    //cout << string2.c_str() << endl;
-    //string1.push_back('a');
-    //cout << string1.c_str() << endl;
-    //string2.pop_back();
-    //cout << string2.c_str() << endl;
-
-    //cout << string1[2] << endl;
-    //cout << string1.front() << endl;
-    //cout << string1.back() << endl;
-    //cout << string1.size() << endl;
-    //cout << std::boolalpha << string3.empty() << endl;
-
-    //string1 = string2;
-    //cout << string1.c_str() << endl;
-
-    //string1 += 'c';
-    //cout << string1.c_str() << endl;
-
-    //cout << std::boolalpha << (string1 != string2) << endl;
-    //cout << std::boolalpha << (string1 == string2) << endl;
-    //cout << std::boolalpha << (string2 < string1) << endl;
-
-    //cout << "End of program" << endl;
+    vhclAlloc.cleanAllVehicles();
     return 0;
 }
