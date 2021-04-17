@@ -15,6 +15,7 @@ VehicleAllocator::~VehicleAllocator()
     }
     delete[] vhclArray;
     delete myGarage;
+    vehiclesAmount = 0;
 }
 
 Vehicle &VehicleAllocator::generateNewVehicle(const char *registration, const char *description, std::size_t space)
@@ -42,7 +43,7 @@ Vehicle *VehicleAllocator::getVehicleFromRegistration(const char *reg) const
 {
     for (std::size_t i = 0; i < vehiclesAmount; ++i)
     {
-        if (!strcmp(vhclArray[i]->registration(), reg))
+        if (!m_strcmp(vhclArray[i]->registration(), reg))
         {
             return vhclArray[i];
         } 
@@ -84,7 +85,7 @@ std::size_t VehicleAllocator::returnIndexOfVehicle(Vehicle &v)
     std::size_t index = -1;
     for (std::size_t i = 0; i < vehiclesAmount; ++i)
     {
-        if (!strcmp(vhclArray[i]->registration(), v.registration()))
+        if (!m_strcmp(vhclArray[i]->registration(), v.registration()))
         {
             index = i;
         }
@@ -129,11 +130,11 @@ void VehicleAllocator::cleanAllVehicles()
         delete vhclArray[i];
     }
     delete[] vhclArray;
-    delete myGarage;
+    //delete myGarage;
     vehiclesAmount = 0;
-    vhclArray = new Vehicle *[vehiclesAmount];
+    //vhclArray = new Vehicle *[vehiclesAmount];
 }
-void VehicleAllocator::cleanVehiclesInMyGarage()
+void VehicleAllocator::cleanVehiclesInMyGarage() 
 {
     myGarage->clear();
 }
