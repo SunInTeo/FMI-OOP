@@ -8,6 +8,7 @@
 class MyString
 {
     char *str = nullptr;
+    std::size_t length;
 
     void copy(const MyString &rhs);
 

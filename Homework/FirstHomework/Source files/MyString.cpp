@@ -5,6 +5,7 @@ void MyString::copy(const MyString &rhs)
     char *buffer = new char[m_strlen(rhs.str) + 1];
     m_strcpy(buffer, rhs.str);
     str = buffer;
+    length = rhs.length;
 }
 
 void MyString::clear()
@@ -13,17 +14,20 @@ void MyString::clear()
     {
         delete[] str;
     }
+    length = 0;
 }
 
 MyString::MyString()
 {
-    str = new char[1];
-    str[0] = '\0';
+    length = 0;
+    str = new char[length + 1];
+    str[length] = '\0';
 }
 
 MyString::MyString(const char *str)
 {
-    this->str = new char[m_strlen(str) + 1];
+    length = m_strlen(str);
+    this->str = new char[length + 1];
     m_strcpy(this->str, str);
 }
 
@@ -39,7 +43,7 @@ MyString::~MyString()
 
 char &MyString::at(std::size_t pos)
 {
-    if (pos > m_strlen(str))
+    if (pos > length)
     {
         throw std::out_of_range("Invalid index");
     }
@@ -49,7 +53,7 @@ char &MyString::at(std::size_t pos)
 
 const char &MyString::at(std::size_t pos) const
 {
-    if (pos > m_strlen(str))
+    if (pos > length)
     {
         throw std::out_of_range("Invalid index");
     }
@@ -59,13 +63,13 @@ const char &MyString::at(std::size_t pos) const
 
 char &MyString::operator[](std::size_t pos)
 {
-    assert(pos <= m_strlen(str) && "Position should be lesser than length");
+    assert(pos <= length && "Position should be lesser than length");
     return str[pos];
 }
 
 const char &MyString::operator[](std::size_t pos) const
 {
-    assert(pos <= m_strlen(str) && "Position should be lesser than length");
+    assert(pos <= length && "Position should be lesser than length");
     return str[pos];
 }
 
@@ -81,36 +85,36 @@ const char &MyString::front() const
 
 char &MyString::back()
 {
-    return str[m_strlen(str) - 1];
+    return str[length - 1];
 }
 
 const char &MyString::back() const
 {
-    return str[m_strlen(str) - 1];
+    return str[length - 1];
 }
 
 bool MyString::empty() const
 {
-    return !m_strlen(str);
+    return !length;
 }
 
 std::size_t MyString::size() const
 {
-    return m_strlen(str);
+    return length;
 }
 
 void MyString::push_back(char c)
 {
-    char *buffer = new char[m_strlen(str) + 2];
+    char *buffer = new char[length + 2];
 
     if(!buffer) return;
 
-    for (std::size_t i = 0; i < m_strlen(str); ++i)
+    for (std::size_t i = 0; i < length; ++i)
     {
         buffer[i] = str[i];
     }
-    buffer[m_strlen(str)] = c;
-    buffer[m_strlen(str) + 1] = '\0';
+    buffer[length] = c;
+    buffer[length + 1] = '\0';
 
     delete[] str;
     str = buffer;
@@ -118,9 +122,11 @@ void MyString::push_back(char c)
 
 void MyString::pop_back()
 {
-    assert(m_strlen(str) > 0 && "Length should be greater than 0");
+    assert(length > 0 && "Length should be greater than 0");
 
-    str[m_strlen(str) - 1] = '\0';
+    --length;
+    str[length] = '\0';
+    //str[m_strlen(str) - 1] = '\0';
 }
 
 const char *MyString::c_str() const
@@ -146,14 +152,14 @@ MyString &MyString::operator+=(char c)
 
 MyString &MyString::operator+=(const MyString &rhs)
 {
-    std::size_t newSize = m_strlen(str) + m_strlen(rhs.str);
+    std::size_t newSize = length + rhs.length;
 
     char *buffer = new char[newSize + 1];
 
     std::size_t index = 0;
     for (std::size_t i = 0; i < newSize; ++i)
     {
-        if (i < m_strlen(str))
+        if (i < length)
         {
             buffer[i] = str[i];
         }
@@ -176,6 +182,7 @@ MyString MyString::operator+(char c) const
     MyString temp;
 
     temp.str = str;
+    temp.length = length;
     temp.push_back(c);
 
     return temp;
