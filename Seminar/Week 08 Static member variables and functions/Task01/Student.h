@@ -1,6 +1,7 @@
 #ifndef STUDENT_H
 #define STUDENT_H
 
+#include <fstream>
 #include <iostream>
 
 class Student
@@ -15,12 +16,17 @@ class Student
     void copy(const Student &other);
 public:
     //Student();
-    Student(const char *name, const bool isEnrolled);
+    Student(const char *name, bool isEnrolled);
     Student(const Student &other);
     ~Student();
 
+    int getFacultyNumber() const;
+    bool getEnrollment() const;
+
+    void setEnrollment();
+
     Student &operator=(const Student &other);
-    friend std::ostream &operator<<(std::ostream &out, Student &other);
+    friend std::ostream &operator<<(std::ostream &out, const Student &other);
 };
 
 #endif

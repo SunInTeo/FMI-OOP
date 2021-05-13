@@ -38,7 +38,7 @@ void Student::copy(const Student &other)
 //Student::Student() : name(nullptr), facNum(), isEnrolled(false)
 //{}
 
-Student::Student(const char *name, const bool isEnrolled)
+Student::Student(const char *name, bool isEnrolled)
 {
     char *buffer;
 
@@ -68,6 +68,21 @@ Student::~Student()
     deallocateMemory();
 }
 
+int Student::getFacultyNumber() const
+{
+    return facNum;
+}
+
+bool Student::getEnrollment() const
+{
+    return isEnrolled;
+}
+
+void Student::setEnrollment()
+{
+    isEnrolled = true;
+}
+
 Student &Student::operator=(const Student &other)
 {
     if (this != &other)
@@ -79,7 +94,7 @@ Student &Student::operator=(const Student &other)
     return *this;
 }
 
-std::ostream &operator<<(std::ostream &out, Student &other)
+std::ostream &operator<<(std::ostream &out, const Student &other)
 {
     out << other.name << "{" << other.facNum << "}\n"; //"/ " << ((other.isEnrolled) ? "is enrolled":"is not enrolled") << endl;
 

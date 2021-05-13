@@ -2,38 +2,6 @@
 
 using std::cout;
 
-void University::resize()
-{
-    size_t newCapacity = capacity * INCREASE_STEP;
-
-    Student **newStudents = nullptr;
-    try
-    {
-        newStudents = new Student *[newCapacity];
-    }
-    catch (const std::exception &e)
-    {
-        std::cerr << e.what() << '\n';
-        return;
-    }
-
-    for (int i = 0; i < newCapacity; ++i)
-    {
-        if (i < this->size)
-        {
-            newStudents[i] = new Student(*studentsArray[i]);
-        }
-        else
-        {
-            newStudents[i] = nullptr;
-        }
-    }
-
-    deallocate();
-    studentsArray = newStudents;
-    capacity = newCapacity;
-}
-
 void University::copy(const University &other)
 {
     Student **buffer = nullptr;
@@ -66,15 +34,47 @@ void University::copy(const University &other)
 
 void University::deallocate()
 {
-    for (std::size_t i = 0; i < this->capacity; ++i)
+    for (std::size_t i = 0; i < capacity; ++i)
     {
-        if (this->studentsArray[i])
+        if (studentsArray[i])
         {
-            delete this->studentsArray[i];
+            delete studentsArray[i];
         }
     }
 
-    delete[] this->studentsArray;
+    delete[] studentsArray;
+}
+
+void University::resize()
+{
+    size_t newCapacity = capacity * INCREASE_STEP;
+
+    Student **newStudents = nullptr;
+    try
+    {
+        newStudents = new Student *[newCapacity];
+    }
+    catch (const std::exception &e)
+    {
+        std::cerr << e.what() << '\n';
+        return;
+    }
+
+    for (std::size_t i = 0; i < newCapacity; ++i)
+    {
+        if (i < size)
+        {
+            newStudents[i] = new Student(*studentsArray[i]);
+        }
+        else
+        {
+            newStudents[i] = nullptr;
+        }
+    }
+
+    deallocate();
+    studentsArray = newStudents;
+    capacity = newCapacity;
 }
 
 University::University()
@@ -105,7 +105,7 @@ University::University(const University &other)
 
 University::~University()
 {
-    this->deallocate();
+    deallocate();
 }
 
 void University::addStudent(const char *name, bool isEnrolled)
@@ -131,6 +131,26 @@ void University::addStudent(const Student &student)
 size_t University::getSize() const
 {
     return size;
+}
+
+void University::setSubject(int facNum)
+{
+    int searchedIndex = -1;
+    for (std::size_t i = 0; i < size; ++i)
+    {
+        if (studentsArray[i]->getFacultyNumber() == facNum)
+        {
+            searchedIndex = i;
+            break;
+        }
+    }
+
+    if (searchedIndex == -1)
+    {
+        throw std::invalid_argument("Invalid faculty number!");
+    }
+
+    studentsArray[searchedIndex]->setEnrollment();
 }
 
 University &University::operator=(const University &other)

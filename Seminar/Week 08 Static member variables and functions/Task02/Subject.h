@@ -1,17 +1,35 @@
 #ifndef SUBJECT_H
 #define SUBJECT_H
 
-/*Направете клас Subject, който има следните данни: статичен указател към University(от предното упражнение), 
-масив от входящи номера на студенти. 
-Да се напишат:
+#include "..\Task01\University.h"
+#include "..\Task01\Consts.h"
 
-- статичен метод за добавяне нa задаване на указателя към University;
-- метод за добавяне на входящ номер на студент;
-- статичен метод който принтира номерата и имената на всички студенти които нямат записана дисциплина;
-- оperator[], който връща студента отговарящ на i-я добавен входящ номер;*/
 class Subject
 {
+    static University *university;
+    int *facNums;
+
+    std::size_t size;
+    std::size_t capacity;
+
+    void copy(const Subject &other);
+    void deallocate();
+    void resize();
+
 public:
+    static void setUniversity(University *university);
+
+    Subject();
+    Subject(const Subject &other);
+    ~Subject();
+
+    void addFacultyNumber(int facNum);
+    void printUnenrolledStudents();
+
+    std::size_t getSize() const;
+
+    Subject &operator=(const Subject &other);
+    Student &operator[](std::size_t index);
 };
 
 #endif

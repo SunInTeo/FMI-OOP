@@ -1,5 +1,8 @@
 #include <iostream>
-#include "Task01\University.h"
+#include "Task02\Subject.h"
+
+using std::cout;
+using std::endl;
 
 int main()
 {
@@ -22,13 +25,31 @@ int main()
     University university;
     university = university1 + university2;
 
-    for (std::size_t i = 0; i < university.getSize(); ++i)
+    /*for (std::size_t i = 0; i < university.getSize(); ++i)
     {
         std::cout << "Student #" << i + 1 << ": \n";
         std::cout << university[i] << std::endl;
-    }
+    }*/
 
-    
+    Subject literature;
+
+    literature.setUniversity(&university);
+
+    literature.printUnenrolledStudents();
+
+    cout << endl;
+
+    literature.addFacultyNumber(88091);
+    literature.addFacultyNumber(88093);
+
+    literature.printUnenrolledStudents();
+
+    cout << endl;
+
+    for (std::size_t i = 0; i < literature.getSize(); ++i)
+    {
+        std::cout << literature[i] << std::endl;
+    }
 
     return 0;
 }
