@@ -13,11 +13,12 @@ void Book::copy(const Book &other)
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
+        exit(0);
     }
     strcpy(buffer, other.title);
     id = other.id;
     title = buffer;
-    clientId = other.clientId;
+    customerID = other.customerID;
     yearOfIssue = other.yearOfIssue;
 }
 
@@ -33,13 +34,13 @@ Book::Book()
 {
     title = nullptr;
     yearOfIssue = 0;
-    clientId = -1;
+    customerID = -1;
 }
 
 Book::Book(const char *title, int yearOfIssue, int customerID)
 {
     id = Book::counter++;
-    clientId = customerID;
+    customerID = customerID;
     this->title = nullptr;
     try
     {
@@ -48,6 +49,7 @@ Book::Book(const char *title, int yearOfIssue, int customerID)
     catch (const std::exception &e)
     {
         std::cerr << e.what() << '\n';
+        exit(0);
     }
     strcpy(this->title, title);
     this->yearOfIssue = yearOfIssue;
@@ -92,9 +94,9 @@ bool Book::operator>(const Book &other) const
 std::ostream &operator<<(std::ostream &out, const Book &other)
 {
     out << "Id: " << other.id << "\n";
-    if (other.clientId != -1)
+    if (other.customerID != -1)
     {
-        out << "Customer ID: " << other.clientId << "\n";
+        out << "Customer ID: " << other.customerID << "\n";
     }
     out << "Title: " << other.title << "\n";
     out << "Year of issue: " << other.yearOfIssue << "\n";
@@ -108,10 +110,10 @@ int Book::getID() const
 
 int Book::getCustomerID() const
 {
-    return clientId;
+    return customerID;
 }
 
 void Book::setCustomerID(int customerID)
 {
-    clientId = customerID;
+    customerID = customerID;
 }

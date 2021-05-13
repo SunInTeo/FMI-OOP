@@ -4,9 +4,8 @@
 using std::cout;
 using std::endl;
 
-
 int main()
-{   
+{
     Library myLibrary;
 
     myLibrary.addCustomer("Ivan", 20);
@@ -19,6 +18,15 @@ int main()
     myLibrary.addBook("Test4", 2000, -1);
 
     myLibrary.printNotTakenBooks();
+
+    myLibrary.rentABook(100, 1000);
+
+    myLibrary.returnBook(100, 1000);
+
+    cout << myLibrary.getOldestCustomer() << endl;
+    cout << myLibrary.getYoungestCustomer() << endl;
+    cout << myLibrary.getNewestBook() << endl;
+    cout << myLibrary.getOldestBook() << endl;
 
     return 0;
 }

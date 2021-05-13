@@ -8,7 +8,7 @@ class Book
 {
     static int counter;
     int id;
-    int clientId;
+    int customerID;
     char *title;
     int yearOfIssue;
 
