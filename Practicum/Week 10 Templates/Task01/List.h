@@ -16,6 +16,7 @@ private:
     std::size_t size;
     std::size_t capacity;
 
+protected:
     void copy(const List<T> &other);
     void deallocate();
     void resize();
@@ -178,6 +179,7 @@ void List<T>::write(std::string fileName)
         return;
     }
 
+    file << size << std::endl;
     for (std::size_t i = 0; i < size; ++i)
     {
         file << data[i] << std::endl;
@@ -197,7 +199,9 @@ void List<T>::read(std::string fileName)
         return;
     }
 
-    while (!file.eof())
+    std::size_t fileSize;
+    file >> fileSize;
+    for (std::size_t i = 0; i < size; ++i)
     {
         T temp;
         file >> temp;
