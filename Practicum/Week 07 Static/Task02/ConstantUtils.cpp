@@ -15,4 +15,6 @@ bool ConsultantUtils::isGoodForTravel(const Computer &computer)
 {
     double weight = computer.getWeight();
     double batteryLife = computer.getBatteryLife();
+
+    return weight <= 2.5 && batteryLife > 6;
 }

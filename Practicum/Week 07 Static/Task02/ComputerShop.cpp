@@ -1,5 +1,8 @@
 #include "ComputerShop.h"
 
+using std::cout;
+using std::endl;
+
 void ComputerShop::copy(const ComputerShop &rhs)
 {
     computersList = rhs.computersList;
@@ -31,6 +34,54 @@ ComputerShop::ComputerShop(const ComputerShop &rhs)
 ComputerShop::~ComputerShop()
 {
     deallocate();
+}
+
+void ComputerShop::addComputer(const Computer &computer)
+{
+    if (computersAmount == size)
+    {
+        throw std::out_of_range("Cannot add more computers");
+    }
+
+    for (std::size_t i = 0; i < computersAmount; ++i)
+    {
+        if (computersList[i].getBrand() == computer.getBrand())
+        {
+            computersList[i].increaseQuantity();
+            return;
+        }
+    }
+
+    computersList[computersAmount++] = computer;
+}
+
+void ComputerShop::buyComputer(std::string wantedBrand, double money)
+{
+    for (std::size_t i = 0; i < computersAmount; ++i)
+    {
+        if (computersList[i].getBrand() == wantedBrand)
+        {
+            if (computersList[i].getPrice() > money)
+            {
+                throw std::invalid_argument("Not enough money");
+            }
+            else
+            {
+                computersList[i].decreaseQuantity();
+                cout << "Successfull purchase" << endl;
+            }
+
+            if (computersList[i].getQuantity() == 0)
+            {
+                std::swap(computersList[i], computersList[computersAmount - 1]);
+                --computersAmount;
+            }
+
+            return;
+        }
+    }
+
+    throw std::invalid_argument("This brand does not exist in the shop");
 }
 
 Computer *ComputerShop::filter(filterFunction func, std::size_t &resultSize)
