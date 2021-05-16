@@ -1,7 +1,7 @@
 #include <iostream>
 #include "ComponentType.h"
 
-unsigned ComponentType::generatedNumber = 789456;
+unsigned ComponentType::generatedNumber = 123456;
 
 ComponentType::ComponentType()
 {
