@@ -1,4 +1,4 @@
-#include "..\Header files\Registration.h"
+#include "../Header files/Registration.h"
 
 bool Registration::isValid(const char *str)
 {
