@@ -20,7 +20,7 @@ bool Registration::isValid(const char *str)
         }
 
         size_t index = (len == 8 ? 2 : 1);
-        for (int i = index; i < len - 2; ++i)
+        for (size_t i = index; i < len - 2; ++i)
         {
             if (str[i] < '0' || str[i] > '9')
             {
@@ -64,11 +64,14 @@ const char *Registration::toString() const
 
 Registration &Registration::operator=(const Registration &other)
 {
-    if (this != &other)
+    if (isValid(other.registrationNum))
     {
         strcpy(registrationNum, other.registrationNum);
     }
-
+    else
+    {
+        throw std::invalid_argument("Cannot do that");
+    }
     return *this;
 }
 
@@ -86,10 +89,23 @@ Registration &Registration::operator=(const char *str)
     return *this;
 }
 
+bool Registration::operator==(const Registration &other) const
+{
+    bool areSame = true;
+    for (size_t i = 0; i < strlen(other.registrationNum); ++i)
+    {
+        if (other.registrationNum[i] != registrationNum[i])
+        {
+            areSame = false;
+        }
+    }
+    return areSame;
+}
+
 bool Registration::operator==(const char *str) const
 {
     bool areSame = true;
-    for (int i = 0; i < strlen(str); i++)
+    for (size_t i = 0; i < strlen(str); ++i)
     {
         if (str[i] != registrationNum[i])
         {
