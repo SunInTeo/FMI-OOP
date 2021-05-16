@@ -1,4 +1,4 @@
-#include "Registration.h"
+#include "..\Header files\Registration.h"
 
 bool Registration::isValid(const char *str)
 {
@@ -7,28 +7,40 @@ bool Registration::isValid(const char *str)
     if (len == 7 || len == 8)
     {
         if (str[0] < 'A' || str[0] > 'Z')
+        {
             return false;
+        }
 
         if (len == 8)
         {
             if (str[1] < 'A' || str[1] > 'Z')
+            {
                 return false;
+            }
         }
 
         size_t index = (len == 8 ? 2 : 1);
         for (int i = index; i < len - 2; ++i)
         {
             if (str[i] < '0' || str[i] > '9')
+            {
                 return false;
+            }
         }
 
         if (str[len - 2] < 'A' || str[len - 2] > 'Z')
+        {
             return false;
+        }
         if (str[len - 1] < 'A' || str[len - 1] > 'Z')
+        {
             return false;
+        }
     }
     else
+    {
         return false;
+    }
 
     return true;
 }
@@ -40,7 +52,9 @@ Registration::Registration(const char *str)
         strcpy(registrationNum, str);
     }
     else
+    {
         throw std::invalid_argument("Cannot do that");
+    }
 }
 
 const char *Registration::toString() const
@@ -65,7 +79,9 @@ Registration &Registration::operator=(const char *str)
         strcpy(registrationNum, str);
     }
     else
-        throw std::exception();
+    {
+        throw std::invalid_argument("Cannot do that");
+    }
 
     return *this;
 }
@@ -76,7 +92,9 @@ bool Registration::operator==(const char *str) const
     for (int i = 0; i < strlen(str); i++)
     {
         if (str[i] != registrationNum[i])
+        {
             areSame = false;
+        }
     }
     return areSame;
 }

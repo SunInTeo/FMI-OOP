@@ -3,6 +3,7 @@
 
 #include <iostream>
 #include <cstring>
+#include <exception>
 
 using std::size_t;
 
