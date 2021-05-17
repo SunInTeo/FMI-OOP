@@ -57,7 +57,7 @@ Registration::Registration(const char *str)
     }
 }
 
-const char *Registration::toString() const
+const char *Registration::toCharArray() const
 {
     return registrationNum;
 }

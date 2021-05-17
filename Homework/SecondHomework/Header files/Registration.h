@@ -17,10 +17,11 @@ public:
     Registration() = delete;
     Registration(const char *str);
 
-    const char *toString() const;
+    const char *toCharArray() const;
 
     Registration &operator=(const Registration &other);
     Registration &operator=(const char *str);
+    bool operator==(const Registration &other) const;
     bool operator==(const char *str) const;
 };
 
