@@ -1,13 +1,15 @@
-#ifndef PERSON_H
-#define PERSON_H
+//#ifndef PERSON_H
+//#define PERSON_H
+#pragma once
 
 #include <iostream>
 #include <string>
 #include <vector>
+class Vehicle;
+
 #include "./Vehicle.h"
 
-//class Vehicle;
-class Person : public virtual Vehicle
+class Person
 {
 private:
     std::string name;
@@ -30,4 +32,4 @@ public:
     void printWithVehicles();
 };
 
-#endif
+//#endif

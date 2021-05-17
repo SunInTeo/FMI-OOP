@@ -1,12 +1,14 @@
-#ifndef VEHICLE_H
-#define VEHICLE_H
+//#ifndef VEHICLE_H
+//#define VEHICLE_H
 
-#include "./Registration.h"
-#include "./Person.h"
+#pragma once
+
 #include <string>
 #include <vector>
-
+#include "./Registration.h"
 class Person;
+#include "./Person.h"
+
 class Vehicle
 {
 private:
@@ -33,4 +35,4 @@ public:
     bool operator==(const Vehicle &other) const;
 };
 
-#endif
+//#endif
