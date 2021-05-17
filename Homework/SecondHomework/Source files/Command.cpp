@@ -5,26 +5,25 @@ using std::string;
 
 Command::Command(std::string raw)
 {
-    size_t index = 0;
     bool quoteMode = false;
     string newStr;
-    while (raw[index] != '\0')
+    for(size_t i = 0; i < strlen(raw.c_str()); ++i)
     {
-        if (raw[index] == ' ' && (index != 0 && raw[index - 1] != ' ') && !quoteMode)
+        if (raw[i] == ' ' && (i != 0 && raw[i - 1] != ' ') && !quoteMode)
         {
             arrString.push_back(newStr);
             newStr.clear();
         }
-        else if (raw[index] == '"')
+        else if (raw[i] == '"')
         {
             quoteMode = !quoteMode;
         }
-        else if (raw[index] != ' ' || quoteMode)
+        else if (raw[i] != ' ' || quoteMode)
         {
-            newStr.push_back(raw[index]);
+            newStr.push_back(raw[i]);
         }
-        index++;
     }
+
     arrString.push_back(newStr);
 }
 
@@ -39,7 +38,7 @@ const string &Command::operator[](std::size_t pos) const
 
 string Command::getCommand() // it should return a command as string at a given position
 {
-    return ;
+    return;
 }
 
 void Command::print()
