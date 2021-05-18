@@ -1,4 +1,4 @@
-#include "./Header files/Command.h"
+#include "../Header files/Command.h"
 
 using std::size_t;
 using std::string;

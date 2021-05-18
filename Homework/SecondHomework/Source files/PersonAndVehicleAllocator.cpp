@@ -88,40 +88,46 @@ void PersonAndVehicleAllocator::release(std::string personID, std::string vehicl
 }
 void PersonAndVehicleAllocator::remove(std::string str)
 {
-    std::size_t tempID = getType(str);
+    int tempID = getType(str);
     switch (tempID)
     {
-    case 1:
-        Registration tempReg(str.c_str());
-        Vehicle *tempVhcl = getVehicleByID(tempReg);
-        tempVhcl->getOwner().release(tempReg);
-
-        for (std::size_t i = 0; i < vehicleArray.size(); ++i)
+        case 1:
         {
-            if (!strcmp(vehicleArray.at(i)->getReg().toCharArray(), tempReg.toCharArray()))
-            {
-                delete vehicleArray.at(i);
-                vehicleArray.erase(vehicleArray.begin() + i);
-            }
-        }
-        break;
-    case 2:
-        unsigned int tempUID = stringToInt(str);
-        Person *tempPerson = getPersonByID(tempUID);
-        tempPerson->releaseAll();
+            Registration tempReg(str.c_str());
+            Vehicle *tempVhcl = getVehicleByID(tempReg);
+            tempVhcl->getOwner().release(tempReg);
 
-        for (std::size_t i = 0; i < personArray.size(); ++i)
-        {
-            if (personArray.at(i)->getUid() == tempUID)
+            for (std::size_t i = 0; i < vehicleArray.size(); ++i)
             {
-                delete personArray.at(i);
-                personArray.erase(personArray.begin() + i);
+                if (!strcmp(vehicleArray.at(i)->getReg().toCharArray(), tempReg.toCharArray()))
+                {
+                    delete vehicleArray.at(i);
+                    vehicleArray.erase(vehicleArray.begin() + i);
+                }
             }
+            break;
         }
-        break;
-    default:
-        throw std::invalid_argument("Incorrect input");
-        break;
+        case 2:
+        {
+            unsigned int tempUID = stringToInt(str);
+            Person *tempPerson = getPersonByID(tempUID);
+            tempPerson->releaseAll();
+
+            for (std::size_t i = 0; i < personArray.size(); ++i)
+            {
+                if (personArray.at(i)->getUid() == tempUID)
+                {
+                    delete personArray.at(i);
+                    personArray.erase(personArray.begin() + i);
+                }
+            }
+            break;
+        }
+        default:
+        {
+            throw std::invalid_argument("Incorrect input");
+            break;
+        }
     }
 }
 void PersonAndVehicleAllocator::show(std::string str)
@@ -139,21 +145,27 @@ void PersonAndVehicleAllocator::show(std::string str)
         std::size_t tempID = getType(str);
         switch (tempID)
         {
-        case 1:
-            Registration tempReg(str.c_str());
-            Vehicle *tempVhcl = getVehicleByID(tempReg);
-            tempVhcl->printVehicleAndOwner();
-            std::cout << std::endl;
-            break;
-        case 2:
-            unsigned int tempUID = stringToInt(str);
-            Person *tempPerson = getPersonByID(tempUID);
-            tempPerson->printWithVehicles();
-            std::cout << std::endl;
-            break;
-        default:
-            throw std::invalid_argument("Incorrect input");
-            break;
+            case 1:
+                {
+                Registration tempReg(str.c_str());
+                Vehicle *tempVhcl = getVehicleByID(tempReg);
+                tempVhcl->printVehicleAndOwner();
+                std::cout << std::endl;
+                break;
+                }
+            case 2:
+                {
+                unsigned int tempUID = stringToInt(str);
+                Person *tempPerson = getPersonByID(tempUID);
+                tempPerson->printWithVehicles();
+                std::cout << std::endl;
+                break;
+                }
+            default:
+                {
+                throw std::invalid_argument("Incorrect input");
+                break;
+                }
         }
     }
 }
