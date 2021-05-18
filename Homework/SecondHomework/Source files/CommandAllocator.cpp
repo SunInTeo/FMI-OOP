@@ -5,10 +5,20 @@ void CommandAllocator::read(std::string fileName)
     std::ifstream file(fileName.c_str());
     std::string input;
 
+    /*std::ifstream file(FILENAME);
+    if (file.is_open()) {
+    std::string line;
+    while (std::getline(file, line)) {
+        // using printf() in all tests for consistency
+        printf("%s", line.c_str());
+    }
+    file.close();
+    }*/
+
     bool keepReading = true;
     do
     {
-        getline(std::cin, input);
+
         if (!file.is_open())
         {
             std::cerr << "Error while opening the file";
@@ -16,8 +26,16 @@ void CommandAllocator::read(std::string fileName)
         }
         else
         {
-            Command currentCommand(input);
-            execCommand(currentCommand, keepReading);
+            std::string line;
+            while (std::getline(file, line))
+            {
+                std::cout << line << std::endl;
+                Command currentCommand1(line);
+                execCommand(currentCommand1, keepReading);
+            }
+            getline(std::cin, input);
+            Command currentCommand2(input);
+            execCommand(currentCommand2, keepReading);
         }
     } while (keepReading);
 
@@ -40,7 +58,7 @@ void CommandAllocator::save(std::string path)
         {
             file << std::endl;
         }
-            
+
         std::string tempStr = commmandsArray[i].getCommand();
         file << tempStr;
     }

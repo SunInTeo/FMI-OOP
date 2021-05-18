@@ -1,5 +1,4 @@
 #include <iostream>
-#include <fstream>
 #include "../Header files/CommandAllocator.h"
 
 int main(int argc, char *argv[])
@@ -12,8 +11,9 @@ int main(int argc, char *argv[])
     else if (argc == 2)
     {
         std::cout << "Opening file...\n";
-        std::string tempStr(argv[1]);
-        CommandAllocator myCmdAlloc(tempStr);
+        //std::string tempStr(argv[1]);
+        //CommandAllocator myCmdAlloc(tempStr);
+        CommandAllocator myCmdAlloc((std::string)argv[1]);
         myCmdAlloc.start();
     }
     else
