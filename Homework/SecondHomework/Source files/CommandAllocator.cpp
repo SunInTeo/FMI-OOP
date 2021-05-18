@@ -56,6 +56,7 @@ void CommandAllocator::execCommand(const Command &myCmd, bool &keepReading)
     {
         keepReading = false;
         std::cout << "End of program" << std::endl;
+        exit(0);
     }
 
     else if (!strcmp(firstCommand.c_str(), "VEHICLE"))

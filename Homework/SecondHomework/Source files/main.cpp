@@ -4,10 +4,6 @@
 
 int main(int argc, char *argv[])
 {
-    /*for (int i = 0; i < argc; i++)
-    {
-        std::cout << argv[i] << '\n';
-    }*/
     if (argc == 1)
     {
         CommandAllocator myCmdAlloc;
@@ -22,7 +18,6 @@ int main(int argc, char *argv[])
     }
     else
     {
-
         std::cerr << "Too many arguments!\n";
         return 1;
     }

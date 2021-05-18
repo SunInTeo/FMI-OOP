@@ -1,13 +1,18 @@
 #include "../Header files/Utils.h"
 
+#include <iostream>
+
 std::string toUpperCase(const std::string &str)
 {
-    std::string newStr(str);
-    for (size_t i = 0; i < newStr.length(); ++i)
+    std::string tempStr(str);
+    for (size_t i = 0; i < tempStr.length(); ++i)
     {
-        newStr[i] = toupper(newStr[i]);
+        if (tempStr[i] >= 'a' && tempStr[i] <= 'z')
+        {
+            tempStr[i] -= 'a' - 'A';
+        }
     }
-    return newStr;
+    return tempStr;
 }
 
 const unsigned int stringToInt(const std::string &str)
