@@ -2,17 +2,18 @@
 
 #include <iostream>
 
-std::string toUpperCase(const std::string &str)
+std::string toUpperCase(std::string str)
 {
-    std::string tempStr(str);
-    for (size_t i = 0; i < tempStr.length(); ++i)
+    //std::string tempStr(str);
+    for (size_t i = 0; i < str.length(); ++i)
     {
-        if (tempStr[i] >= 'a' && tempStr[i] <= 'z')
+        if (str[i] >= 'a' && str[i] <= 'z')
         {
-            tempStr[i] -= 'a' - 'A';
+            str[i] -= 'a' - 'A';
         }
     }
-    return tempStr;
+    return str;
+    //return tempStr;
 }
 
 const unsigned int stringToInt(const std::string &str)
