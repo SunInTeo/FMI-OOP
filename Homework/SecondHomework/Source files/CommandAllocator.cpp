@@ -3,17 +3,6 @@
 void CommandAllocator::read(std::string fileName)
 {
     std::ifstream file(fileName.c_str());
-    std::string input;
-
-    /*std::ifstream file(FILENAME);
-    if (file.is_open()) {
-    std::string line;
-    while (std::getline(file, line)) {
-        // using printf() in all tests for consistency
-        printf("%s", line.c_str());
-    }
-    file.close();
-    }*/
 
     bool keepReading = true;
     do
@@ -33,6 +22,8 @@ void CommandAllocator::read(std::string fileName)
                 Command currentCommand1(line);
                 execCommand(currentCommand1, keepReading);
             }
+
+            std::string input;
             getline(std::cin, input);
             Command currentCommand2(input);
             execCommand(currentCommand2, keepReading);
