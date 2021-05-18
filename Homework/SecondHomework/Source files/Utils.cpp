@@ -4,7 +4,6 @@
 
 std::string toUpperCase(std::string str)
 {
-    //std::string tempStr(str);
     for (size_t i = 0; i < str.length(); ++i)
     {
         if (str[i] >= 'a' && str[i] <= 'z')
@@ -13,7 +12,6 @@ std::string toUpperCase(std::string str)
         }
     }
     return str;
-    //return tempStr;
 }
 
 const unsigned int stringToInt(const std::string &str)
