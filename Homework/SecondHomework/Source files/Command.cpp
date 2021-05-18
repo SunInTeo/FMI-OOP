@@ -38,7 +38,7 @@ const string &Command::operator[](std::size_t pos) const
 
 string Command::getCommand() // it should return a command as string at a given position
 {
-    return;
+    return rawString;
 }
 
 void Command::print()

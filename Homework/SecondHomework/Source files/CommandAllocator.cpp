@@ -41,7 +41,7 @@ void CommandAllocator::save(std::string path)
             file << std::endl;
         }
             
-        std::string tempStr = commmandsArray.at(i).getCommand();
+        std::string tempStr = commmandsArray[i].getCommand();
         file << tempStr;
     }
 

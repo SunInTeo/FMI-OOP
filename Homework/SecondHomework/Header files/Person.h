@@ -6,7 +6,6 @@
 #include <string>
 #include <vector>
 class Vehicle;
-
 #include "./Vehicle.h"
 
 class Person
