@@ -7,7 +7,6 @@ void CommandAllocator::read(std::string fileName)
     bool keepReading = true;
     do
     {
-
         if (!file.is_open())
         {
             std::cerr << "Error while opening the file";
@@ -19,14 +18,11 @@ void CommandAllocator::read(std::string fileName)
             while (std::getline(file, line))
             {
                 std::cout << line << std::endl;
-                Command currentCommand1(line);
-                execCommand(currentCommand1, keepReading);
+                Command currentCommand(line);
+                execCommand(currentCommand, keepReading);
             }
 
-            std::string input;
-            getline(std::cin, input);
-            Command currentCommand2(input);
-            execCommand(currentCommand2, keepReading);
+            CommandAllocator::start();
         }
     } while (keepReading);
 
@@ -43,15 +39,14 @@ void CommandAllocator::save(std::string path)
         return;
     }
 
-    for (std::size_t i = 0; i < commmandsArray.size(); ++i)
+    for (size_t i = 0; i < commmandsArray.size(); ++i)
     {
         if (i != 0)
         {
-            file << std::endl;
+            file <<std::endl;
         }
 
-        std::string tempStr = commmandsArray[i].getCommand();
-        file << tempStr;
+        file << commmandsArray[i].getCommand();
     }
 
     file.close();
@@ -179,7 +174,7 @@ void CommandAllocator::start()
 
     do
     {
-        getline(std::cin, input);
+        std::getline(std::cin, input);
         Command currentCommand(input);
         execCommand(currentCommand, keepReading);
     } while (keepReading);

@@ -60,5 +60,5 @@ Vehicle &Vehicle::operator=(const Vehicle &other)
 
 bool Vehicle::operator==(const Vehicle &other) const
 {
-    return !strcmp(myRegistration.toCharArray(), other.myRegistration.toCharArray());
+    return myRegistration == other.myRegistration;
 }

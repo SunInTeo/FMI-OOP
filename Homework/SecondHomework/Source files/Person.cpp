@@ -20,7 +20,7 @@ void Person::release(const Registration &other)
     bool isFound = false;
     for (size_t i = 0; i < vehiclesArray.size(); ++i)
     {
-        if (!strcmp(vehiclesArray.at(i)->getReg().toCharArray(), other.toCharArray()))
+        if (vehiclesArray.at(i)->getReg() == other)
         {
             vehiclesArray.at(i)->owner = nullptr;
             vehiclesArray.erase(vehiclesArray.begin() + i);
@@ -48,7 +48,7 @@ bool Person::doesOwn(const Registration &other)
 {
     for (size_t i = 0; i < vehiclesArray.size(); ++i)
     {
-        if (!strcmp(vehiclesArray.at(i)->getReg().toCharArray(), other.toCharArray()))
+        if (vehiclesArray.at(i)->getReg() == other)
         {
             return true;
         }

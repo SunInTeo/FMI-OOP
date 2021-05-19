@@ -1,12 +1,11 @@
 #include "../Header files/Command.h"
 
-using std::size_t;
-using std::string;
-
 Command::Command(std::string raw)
 {
+    rawString = raw;
+
     bool quoteMode = false;
-    string newStr;
+    std::string newStr;
     for(size_t i = 0; i < strlen(raw.c_str()); ++i)
     {
         if (raw[i] == ' ' && (i != 0 && raw[i - 1] != ' ') && !quoteMode)
@@ -27,16 +26,16 @@ Command::Command(std::string raw)
     arrString.push_back(newStr);
 }
 
-string &Command::operator[](std::size_t pos)
+std::string &Command::operator[](std::size_t pos)
 {
     return arrString[pos];
 }
-const string &Command::operator[](std::size_t pos) const
+const std::string &Command::operator[](std::size_t pos) const
 {
     return arrString[pos];
 }
 
-string Command::getCommand() // it should return a command as string at a given position
+std::string Command::getCommand() // it should return a command as string at a given position
 {
     return rawString;
 }

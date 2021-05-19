@@ -16,7 +16,7 @@ std::size_t PersonAndVehicleAllocator::getType(std::string str)
         }
         catch (const std::exception &e)
         {
-            std::cerr << "Cannot convert string neither to Registration nor to Person\n";
+            std::cerr << "Cannot convert string neither to Registration nor to Person";
             return 0;
         }
     }
@@ -45,7 +45,7 @@ void PersonAndVehicleAllocator::createPerson(std::string name, std::string uid)
 {
     if (uid.c_str() == nullptr)
     {
-        throw std::invalid_argument("No uid provided\n");
+        throw std::invalid_argument("No uid provided");
     }
 
     unsigned int tempUID = stringToInt(uid);
@@ -61,7 +61,7 @@ void PersonAndVehicleAllocator::createVehicle(std::string registration, std::str
 {
     if (description.c_str() == nullptr)
     {
-        throw std::invalid_argument("No description provided\n");
+        throw std::invalid_argument("No description provided");
     }
 
     Registration tempReg(registration.c_str());
@@ -99,7 +99,7 @@ void PersonAndVehicleAllocator::remove(std::string str)
 
             for (std::size_t i = 0; i < vehicleArray.size(); ++i)
             {
-                if (!strcmp(vehicleArray.at(i)->getReg().toCharArray(), tempReg.toCharArray()))
+                if (vehicleArray.at(i)->getReg() == tempReg)
                 {
                     delete vehicleArray.at(i);
                     vehicleArray.erase(vehicleArray.begin() + i);
@@ -186,7 +186,7 @@ bool PersonAndVehicleAllocator::doesExistV(Registration &registration)
 {
     for (std::size_t i = 0; i < vehicleArray.size(); ++i)
     {
-        if (!strcmp(vehicleArray.at(i)->getReg().toCharArray(), registration.toCharArray()))
+        if (vehicleArray.at(i)->getReg() == registration)
         {
             return true;
         }
@@ -210,7 +210,7 @@ Vehicle *PersonAndVehicleAllocator::getVehicleByID(const Registration &registrat
 {
     for (std::size_t i = 0; i < vehicleArray.size(); ++i)
     {
-        if (!strcmp(vehicleArray.at(i)->getReg().toCharArray(), registration.toCharArray()))
+        if (vehicleArray.at(i)->getReg() == registration)
         {
             return vehicleArray.at(i);
         }

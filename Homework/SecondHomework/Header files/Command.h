@@ -15,8 +15,8 @@ private:
 public:
     Command(std::string);
 
-    std::string &operator[](std::size_t pos);
-    const std::string &operator[](std::size_t pos) const;
+    std::string &operator[](size_t pos);
+    const std::string &operator[](size_t pos) const;
     
     std::string getCommand();
 

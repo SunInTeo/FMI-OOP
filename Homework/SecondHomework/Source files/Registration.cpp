@@ -53,7 +53,7 @@ Registration::Registration(const char *str)
     }
     else
     {
-        throw std::invalid_argument("Cannot do that");
+        throw std::invalid_argument("Invalid registration");
     }
 }
 
