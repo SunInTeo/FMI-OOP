@@ -35,7 +35,7 @@ const std::string &Command::operator[](std::size_t pos) const
     return arrString[pos];
 }
 
-std::string Command::getCommand() // it should return a command as string at a given position
+std::string Command::getCommand() 
 {
     return rawString;
 }
