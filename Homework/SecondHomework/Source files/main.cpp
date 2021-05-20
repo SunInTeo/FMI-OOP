@@ -11,6 +11,7 @@ int main(int argc, char *argv[])
     else if (argc == 2)
     {
         CommandAllocator myCmdAlloc((std::string)argv[1]);
+        myCmdAlloc.start();
     }
     else
     {
