@@ -1,4 +1,3 @@
-#include <iostream>
 #include "../Header files/CommandAllocator.h"
 
 int main(int argc, char *argv[])
