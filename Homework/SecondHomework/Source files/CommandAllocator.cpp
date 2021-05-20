@@ -22,7 +22,7 @@ void CommandAllocator::read(std::string fileName)
                 execCommand(currentCommand, keepReading);
             }
 
-            CommandAllocator::start();
+            keepReading = false;
         }
     } while (keepReading);
 
