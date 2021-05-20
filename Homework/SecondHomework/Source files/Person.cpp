@@ -57,6 +57,11 @@ bool Person::doesOwn(const Registration &other)
     return false;
 }
 
+bool Person::ownsAtleastOneVehicle()
+{
+    return vehiclesArray.size() >= 1;
+}
+
 std::string Person::getName() const
 {
     return name;

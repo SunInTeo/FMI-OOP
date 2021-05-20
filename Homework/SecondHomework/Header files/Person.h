@@ -1,6 +1,6 @@
-//#ifndef PERSON_H
-//#define PERSON_H
-#pragma once
+#ifndef PERSON_H
+#define PERSON_H
+//#pragma once
 
 #include <iostream>
 #include <string>
@@ -23,6 +23,7 @@ public:
     void releaseAll();
 
     bool doesOwn(const Registration &other);
+    bool ownsAtleastOneVehicle();
 
     std::string getName() const;
     unsigned int getUid() const;
@@ -31,4 +32,4 @@ public:
     void printWithVehicles();
 };
 
-//#endif
+#endif

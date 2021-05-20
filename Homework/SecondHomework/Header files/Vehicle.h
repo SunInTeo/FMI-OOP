@@ -1,7 +1,7 @@
-//#ifndef VEHICLE_H
-//#define VEHICLE_H
+#ifndef VEHICLE_H
+#define VEHICLE_H
 
-#pragma once
+//#pragma once
 
 #include <string>
 #include <vector>
@@ -35,4 +35,4 @@ public:
     bool operator==(const Vehicle &other) const;
 };
 
-//#endif
+#endif
