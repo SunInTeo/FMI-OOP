@@ -36,3 +36,6 @@
 #!.vscode/tasks.json
 #!.vscode/launch.json
 *.code-workspace
+
+# Directories
+.vscode/
