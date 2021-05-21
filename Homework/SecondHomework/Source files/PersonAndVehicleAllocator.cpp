@@ -106,6 +106,15 @@ void PersonAndVehicleAllocator::remove(std::string str)
                 if (answer == 'Y')
                 {
                     tempVhcl->getOwner().release(tempReg);
+
+                    for (std::size_t i = 0; i < vehicleArray.size(); ++i)
+                    {
+                        if (vehicleArray.at(i)->getReg() == tempReg)
+                        {
+                            delete vehicleArray.at(i);
+                            vehicleArray.erase(vehicleArray.begin() + i);
+                        }
+                    }
                 }
                 else if (answer == 'N')
                 {
@@ -118,15 +127,6 @@ void PersonAndVehicleAllocator::remove(std::string str)
             } while (answer != 'Y' && answer != 'N');
         }
         std::cin.ignore();
-
-        for (std::size_t i = 0; i < vehicleArray.size(); ++i)
-        {
-            if (vehicleArray.at(i)->getReg() == tempReg)
-            {
-                delete vehicleArray.at(i);
-                vehicleArray.erase(vehicleArray.begin() + i);
-            }
-        }
 
         break;
     }
@@ -145,6 +145,15 @@ void PersonAndVehicleAllocator::remove(std::string str)
                 if (answer == 'Y')
                 {
                     tempPerson->releaseAll();
+
+                    for (std::size_t i = 0; i < personArray.size(); ++i)
+                    {
+                        if (personArray.at(i)->getUid() == tempUID)
+                        {
+                            delete personArray.at(i);
+                            personArray.erase(personArray.begin() + i);
+                        }
+                    }
                 }
                 else if (answer == 'N')
                 {
@@ -158,15 +167,6 @@ void PersonAndVehicleAllocator::remove(std::string str)
         }
         std::cin.ignore();
 
-        for (std::size_t i = 0; i < personArray.size(); ++i)
-        {
-            if (personArray.at(i)->getUid() == tempUID)
-            {
-                delete personArray.at(i);
-                personArray.erase(personArray.begin() + i);
-            }
-        }
-        
         break;
     }
     default:
