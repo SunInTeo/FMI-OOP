@@ -1,27 +1,5 @@
 #include "../Header files/PersonAndVehicleAllocator.h"
 
-std::size_t PersonAndVehicleAllocator::getType(std::string str)
-{
-    try
-    {
-        Registration tempReg(str.c_str());
-        return 1;
-    }
-    catch (const std::exception &e)
-    {
-        try
-        {
-            stringToInt(str);
-            return 2;
-        }
-        catch (const std::exception &e)
-        {
-            std::cerr << "Cannot convert string neither to Registration nor to Person";
-            return 0;
-        }
-    }
-}
-
 PersonAndVehicleAllocator::~PersonAndVehicleAllocator()
 {
     clear();
@@ -95,38 +73,17 @@ void PersonAndVehicleAllocator::remove(std::string str)
     {
         Registration tempReg(str.c_str());
         Vehicle *tempVhcl = getVehicleByID(tempReg);
-        if (tempVhcl->getOwner().doesOwn(tempReg))
+
+        tempVhcl->getOwnerRef().release(tempReg);
+
+        for (std::size_t i = 0; i < vehicleArray.size(); ++i)
         {
-            std::cerr << "Are you sure that you want to remove a vehicle which has an owner? (Y/N): ";
-            char answer;
-            do
+            if (vehicleArray.at(i)->getReg() == tempReg)
             {
-                std::cin >> answer;
-
-                if (answer == 'Y')
-                {
-                    tempVhcl->getOwner().release(tempReg);
-
-                    for (std::size_t i = 0; i < vehicleArray.size(); ++i)
-                    {
-                        if (vehicleArray.at(i)->getReg() == tempReg)
-                        {
-                            delete vehicleArray.at(i);
-                            vehicleArray.erase(vehicleArray.begin() + i);
-                        }
-                    }
-                }
-                else if (answer == 'N')
-                {
-                    break;
-                }
-                else
-                {
-                    std::cerr << "Incorrect input. Please, try again.\n";
-                }
-            } while (answer != 'Y' && answer != 'N');
+                delete vehicleArray.at(i);
+                vehicleArray.erase(vehicleArray.begin() + i);
+            }
         }
-        std::cin.ignore();
 
         break;
     }
@@ -134,38 +91,17 @@ void PersonAndVehicleAllocator::remove(std::string str)
     {
         unsigned int tempUID = stringToInt(str);
         Person *tempPerson = getPersonByID(tempUID);
-        if (tempPerson->ownsAtleastOneVehicle())
+
+        tempPerson->releaseAll();
+
+        for (std::size_t i = 0; i < personArray.size(); ++i)
         {
-            std::cerr << "Are you sure that you want to remove a person who owns at least one vehicle? (Y/N): ";
-            char answer;
-            do
+            if (personArray.at(i)->getUid() == tempUID)
             {
-                std::cin >> answer;
-
-                if (answer == 'Y')
-                {
-                    tempPerson->releaseAll();
-
-                    for (std::size_t i = 0; i < personArray.size(); ++i)
-                    {
-                        if (personArray.at(i)->getUid() == tempUID)
-                        {
-                            delete personArray.at(i);
-                            personArray.erase(personArray.begin() + i);
-                        }
-                    }
-                }
-                else if (answer == 'N')
-                {
-                    break;
-                }
-                else
-                {
-                    std::cerr << "Incorrect input. Please, try again.\n";
-                }
-            } while (answer != 'Y' && answer != 'N');
+                delete personArray.at(i);
+                personArray.erase(personArray.begin() + i);
+            }
         }
-        std::cin.ignore();
 
         break;
     }
@@ -239,6 +175,28 @@ bool PersonAndVehicleAllocator::doesExistV(Registration &registration)
     }
 
     return false;
+}
+
+std::size_t PersonAndVehicleAllocator::getType(std::string str)
+{
+    try
+    {
+        Registration tempReg(str.c_str());
+        return 1;
+    }
+    catch (const std::exception &e)
+    {
+        try
+        {
+            stringToInt(str);
+            return 2;
+        }
+        catch (const std::exception &e)
+        {
+            std::cerr << "Cannot convert string neither to Registration nor to Person";
+            return 0;
+        }
+    }
 }
 
 Person *PersonAndVehicleAllocator::getPersonByID(const unsigned int &uid)

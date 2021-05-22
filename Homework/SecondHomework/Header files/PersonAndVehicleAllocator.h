@@ -10,13 +10,6 @@ private:
     std::vector<Person *> personArray;
     std::vector<Vehicle *> vehicleArray;
 
-    // returns a number corresponding to the type of <what> the user inputs
-    // helps with the implementation in REMOVE and SHOW functions
-    // 0 - nothing
-    // 1 - registration
-    // 2 - uid
-    std::size_t getType(std::string str);
-
 public:
     ~PersonAndVehicleAllocator();
     void clear();
@@ -31,6 +24,12 @@ public:
     bool doesExistP(unsigned int &uid);
     bool doesExistV(Registration &registration);
 
+    // returns a number corresponding to the type of <what> the user inputs
+    // helps with the implementation in REMOVE and SHOW functions
+    // 0 - nothing
+    // 1 - registration
+    // 2 - uid
+    std::size_t getType(std::string str);
     Person *getPersonByID(const unsigned int &uid);
     Vehicle *getVehicleByID(const Registration &registration);
 
