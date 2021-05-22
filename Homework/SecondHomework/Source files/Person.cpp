@@ -57,7 +57,7 @@ bool Person::doesOwn(const Registration &other)
     return false;
 }
 
-bool Person::ownsAtleastOneVehicle()
+bool Person::ownsAtleastOneVehicle() const 
 {
     return vehiclesArray.size() >= 1;
 }

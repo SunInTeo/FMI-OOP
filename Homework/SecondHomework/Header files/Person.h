@@ -23,7 +23,7 @@ public:
     void releaseAll();
 
     bool doesOwn(const Registration &other);
-    bool ownsAtleastOneVehicle();
+    bool ownsAtleastOneVehicle() const;
 
     std::string getName() const;
     unsigned int getUid() const;
