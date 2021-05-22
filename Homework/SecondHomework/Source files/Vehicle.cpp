@@ -17,9 +17,14 @@ Vehicle::Vehicle(const Vehicle &other) : myRegistration(other.myRegistration)
     copy(other);
 }
 
-Person &Vehicle::getOwner()
+Person &Vehicle::getOwnerRef() const
 {
     return *owner;
+}
+
+Person *Vehicle::getOwnerPtr() const
+{
+    return owner;
 }
 Registration Vehicle::getReg() const
 {
@@ -38,19 +43,19 @@ void Vehicle::print()
 void Vehicle::printVehicleAndOwner()
 {
     Vehicle::print();
-    if(owner != nullptr) 
+    if (owner != nullptr)
     {
         owner->print();
     }
     else
     {
         std::cout << "No owner";
-    } 
+    }
 }
 
 Vehicle &Vehicle::operator=(const Vehicle &other)
 {
-    if(this != &other)
+    if (this != &other)
     {
         copy(other);
     }

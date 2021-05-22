@@ -24,7 +24,8 @@ public:
     Vehicle(const Registration &myRegistration, std::string &description);
     Vehicle(const Vehicle &other);
 
-    Person &getOwner();
+    Person &getOwnerRef() const;
+    Person *getOwnerPtr() const;
     Registration getReg() const;
     std::string getDesc() const;
 
