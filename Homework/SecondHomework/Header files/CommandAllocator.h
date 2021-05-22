@@ -5,9 +5,7 @@
 
 #include "./PersonAndVehicleAllocator.h"
 #include "./Command.h"
-#include "./Person.h"
-#include "./Vehicle.h"
-#include "./Utils.h"
+//#include "./Vehicle.h"
 
 class CommandAllocator
 {
@@ -18,7 +16,7 @@ private:
 
     void read(std::string fileName);
     void save(std::string path);
-    void execCommand(const Command &myCmd, bool &keepReading);
+    void execCommand(const Command &myCmd, std::istream& istr);
 
 public:
     CommandAllocator();

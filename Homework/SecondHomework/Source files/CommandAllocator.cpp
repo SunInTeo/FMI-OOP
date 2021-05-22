@@ -4,26 +4,25 @@ void CommandAllocator::read(std::string fileName)
 {
     std::ifstream file(fileName.c_str());
 
+    if (!file.is_open())
+    {
+        std::cerr << "Error while opening the file";
+        return;
+    }
+
     bool keepReading = true;
     do
     {
-        if (!file.is_open())
+        std::string line;
+        while (std::getline(file, line))
         {
-            std::cerr << "Error while opening the file";
-            keepReading = false;
+            std::cout << line << std::endl;
+            Command currentCommand(line);
+            execCommand(currentCommand, std::cin);
         }
-        else
-        {
-            std::string line;
-            while (std::getline(file, line))
-            {
-                std::cout << line << std::endl;
-                Command currentCommand(line);
-                execCommand(currentCommand, keepReading);
-            }
 
-            keepReading = false;
-        }
+        keepReading = false;
+
     } while (keepReading);
 
     file.close();
@@ -43,7 +42,7 @@ void CommandAllocator::save(std::string path)
     {
         if (i != 0)
         {
-            file <<std::endl;
+            file << std::endl;
         }
 
         file << commmandsArray[i].getCommand();
@@ -52,13 +51,12 @@ void CommandAllocator::save(std::string path)
     file.close();
 }
 
-void CommandAllocator::execCommand(const Command &myCmd, bool &keepReading)
+void CommandAllocator::execCommand(const Command &myCmd, std::istream &istr)
 {
     std::string firstCommand = toUpperCase(myCmd[0]);
 
     if (!strcmp(firstCommand.c_str(), "STOP"))
     {
-        keepReading = false;
         std::cout << "End of program" << std::endl;
         exit(0);
     }
@@ -119,8 +117,61 @@ void CommandAllocator::execCommand(const Command &myCmd, bool &keepReading)
     {
         try
         {
-            myAllocator.remove(myCmd[1]);
-            commmandsArray.push_back(myCmd);
+            std::size_t id = myAllocator.getType(myCmd[1]);
+            bool hasPermission = false;
+            switch (id)
+            {
+            case 1:
+            {
+                Registration reg(myCmd[1].c_str());
+                if (myAllocator.getVehicleByID(reg)->getOwnerPtr())
+                {
+                    hasPermission = true;
+                }
+                break;
+            }
+
+            case 2:
+            {
+                if (myAllocator.getPersonByID(stringToInt(myCmd[1]))->ownsAtleastOneVehicle())
+                {
+                    hasPermission = true;
+                }
+
+                break;
+            }
+
+            default:
+                break;
+            }
+
+            if (hasPermission)
+            {
+                if (&istr == &std::cin)
+                {
+                    std::cout << "Are you sure you want to use the REMOVE func? (Y/N)\n";
+                }
+                    
+                std::string input;
+                getline(istr, input);
+                Command currentCommand(input);
+
+                if (!strcmp(toUpperCase(currentCommand[0]).c_str(), "Y"))
+                {
+                    myAllocator.remove(myCmd[1]);
+                    commmandsArray.push_back(myCmd);
+                    commmandsArray.push_back(currentCommand);
+                }
+                else
+                {
+                    std::cerr << "Incorrect input, no changes were made.\n";
+                }
+            }
+            else
+            {
+                myAllocator.remove(myCmd[1]);
+                commmandsArray.push_back(myCmd);
+            }
         }
         catch (const std::exception &e)
         {
@@ -171,11 +222,13 @@ void CommandAllocator::start()
 {
     std::string input;
     bool keepReading = true;
+    std::string stopString;
 
     do
     {
         std::getline(std::cin, input);
         Command currentCommand(input);
-        execCommand(currentCommand, keepReading);
-    } while (keepReading);
+        execCommand(currentCommand, std::cin);
+        stopString = toUpperCase(currentCommand[0]);
+    } while (stopString != "STOP");
 }
