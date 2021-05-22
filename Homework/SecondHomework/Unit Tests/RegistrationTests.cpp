@@ -1,3 +1,4 @@
+#define CATCH_CONFIG_MAIN
 #include "../Header files/Registration.h"
 #include "../Header files/catch2.hpp"
 
